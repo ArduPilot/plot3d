@@ -1,0 +1,287 @@
+/*
+This file is part of Flight Plotter.
+
+    Flight Plotter is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Flight Plotter is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Flight Plotter.  If not, see <https://www.gnu.org/licenses/>.
+*/
+
+/* 
+    Created on : Sep. 2020
+    Author     : Artur Uzieblo
+*/
+body {
+    background-color: #aaa;
+    margin: 0px;
+    overflow: hidden;
+}
+
+body.waiting * {
+    cursor: wait;
+}
+
+.v-modal    {
+    z-index: 2 !important;
+}
+
+.el-drawer  {
+    min-width: 250px !important;
+}
+
+.modal {
+    display: none;
+    overflow-y: auto;
+    max-height: 600px;
+    padding: 15px;
+    position: fixed;
+    z-index: 3;
+    left: 15%;
+    top: 10%;
+    background: white;
+    box-sizing: border-box;
+    max-width: 550px !important;
+}
+
+.modalInstr {
+    left: 10%;
+    top: 5%;
+    max-height: 800px;
+    max-width: 800px !important;
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 0%;
+    padding: 8px;
+    width: 100%;
+    height: 100%;
+    font-size: 14px;
+}
+
+/* The Close Button */
+.close {
+  float: right;
+}
+
+.el-dropdown-link {
+    cursor: pointer;
+    color: black;
+}
+
+.el-icon-arrow-down {
+    font-size: 12px;
+}
+
+/* switches styling */
+.el-switch__label.is-active {
+    color: transparent;
+}
+.el-switch__label--right {
+    color: #222222;
+}
+.el-switch__label--left    {
+    color: #222222;
+}
+
+.el-row {
+    padding-top: 2px;
+}
+
+.el-input {
+    position: relative;
+    font-size: 14px;
+    display: inline-block;
+    overflow-y: auto;
+}
+
+.el-button--success:focus, .el-button--success:hover {
+    background: #038208;
+    border-color: #038208;
+    color: #FFF;
+}
+
+.el-button--danger:focus, .el-button--danger:hover {
+    background: #f93e3e;
+    border-color: #f93e3e;
+    color: #FFF;
+}
+
+.el-button--primary:focus, .el-button--primary:hover {
+    background: #1678de;
+    border-color: #1678de;
+    color: #FFF;
+}
+
+.el-button--warning:focus, .el-button--warning:hover {
+    background: #c38019;
+    border-color: #c38019;
+    color: #FFF;
+}
+
+.el-button--mini {
+    font-size: 12px;
+}
+
+.el-button--mini, .el-button--mini.is-round {
+    padding: 4px 7px;
+}
+
+.el-button--small {
+    font-size: 1em;
+    padding: 4px 5px !important;
+}
+
+/* control icon size in circle buttons */
+.el-button.is-circle {
+    border-radius: 50%;
+    padding: 2px;
+}
+
+/* change size of all icons below circular button */
+.el-button.is-circle i {
+    font-size: 2em;
+}
+
+.el-icon-setting, .el-icon-rank, 
+.el-icon-top, .el-icon-bottom, 
+.el-icon-right, .el-icon-left, 
+.el-icon-back,
+.el-icon-upload,  .el-icon-upload2,
+.el-icon-download,  .el-icon-document, .el-icon-help {
+    font-size: 1.4em;
+}
+
+/* */
+.demo-input-label {
+    display: inline-block;
+}
+/* controls styling */
+.rs-range-color  {
+    background-color: #0a47a8;
+}
+.rs-path-color  {
+    background-color: #a2c4fa;
+}
+.rs-bg-color  {
+    background-color: #187cd9;
+}
+.rs-tooltip-text {
+    font-size: 20px;
+    color: #fff;
+}
+.rs-full .rs-tooltip {
+    top: 47%;
+    left: 53%;
+}
+
+/* views styling */
+
+.views {
+    padding: 2px;
+    position: relative;
+}
+
+.topleft {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    font-size: calc(1em);
+    color: white;
+}
+
+.pilot {
+    position: absolute;
+    bottom: 6px;
+    left: 4.3vw;
+    font-size: calc(1em);
+    color: yellow;
+}
+
+.pilotR {
+    position: absolute;
+    top: 5vw;
+    left: 8.2vw;
+    font-size: calc(1em);
+    color: yellow;
+}
+
+.pilotF {
+    position: absolute;
+    top: 5vw;
+    left: 4.3vw;
+    font-size: calc(1em);
+    color: yellow;
+}
+
+
+/* roll/pitch/yaw graph styling */
+.ct-grid {
+    stroke: black;
+    stroke-width: 1px;
+    stroke-dasharray: 1px;
+}
+
+.ct-label {
+    color: rgba(0,0,0,.8);
+}
+
+.ct-series-a .ct-line {
+  stroke: #ff0000;
+  stroke-width: 2px;
+}
+.ct-series-a .ct-area {
+  fill: #ff0000;
+}
+
+
+.ct-series-b .ct-line {
+  stroke: #0000ff;
+  stroke-width: 2px;
+}
+.ct-series-b .ct-area {
+  fill: #0000ff;
+}
+
+
+.ct-series-c .ct-line {
+  stroke: #00ff00;
+  stroke-width: 2px;
+}
+.ct-series-c .ct-area {
+  fill: #00ff00;
+}
+
+
+.ct-series-d .ct-line {
+  stroke: #880000;
+  stroke-width: 2px;
+}
+.ct-series-d .ct-area {
+  fill: #880000;
+}
+
+.ct-series-e .ct-line {
+  stroke: #000088;
+  stroke-width: 2px;
+}
+.ct-series-e .ct-area {
+  fill: #000088;
+}
+
+.ct-series-f .ct-line {
+  stroke: 0x008800;
+  stroke-width: 2px;
+}
+.ct-series-f .ct-area {
+  fill: 0x008800;
+}

@@ -1,0 +1,860 @@
+[   
+    {
+        "value": "F3A",
+        "label": "F3A",
+        "views": {
+            "default": {
+                "camera" : [-288,152,185],
+                "target" : [15,120,-280]
+            },
+            "judge": {
+                "camera" : [0, -2.2, 224],
+                "target" : [6, 214, -288]
+                },
+            "top": {
+                "camera" : [0, 761, -150],
+                "target" : [-2, 221, -280]
+                },
+            "left": {
+                "camera" : [-600, 155, -162.5],
+                "target" : [600, 155, -162.5]
+                },
+            "right":    {
+                "camera" : [600, 155, -162.5],
+                "target" : [-600, 155, -162.5]
+                },
+            "mid":  {
+                "camera" : [16.44, 118.33, 271.85],
+                "target" : [14.44, 139.33, -283.15]
+                }
+        },
+        "children": [
+            {
+                "value": "P23", 
+                "label": "P23",
+                "minalt": -10,
+                "model" : "/leader/leader.obj",
+                "modelmaterials" : "/leader/leader.mtl",
+                "modelscale" : 2000,                
+                "comments": "name will be displayed in the splitter, id must be sp_X where X is the maneuver id that must start from 0, wd - width in %. Total wds must add to 100%, use 0 fro stop and set sel to false",
+                "mans": [                    
+                    {"name" : "tkOf", "k" : 0, "id" : "sp_0", "sp": 0, "wd": 7.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "tHat", "k" : 4, "id": "sp_1", "sp": 1, "wd": 5.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "hSqL", "k" : 2, "id": "sp_2", "sp": 2, "wd": 3.3, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "hB", "k" : 4, "id": "sp_3", "sp": 3, "wd": 7.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "hSqLC", "k" : 3, "id": "sp_4", "sp": 4, "wd": 4, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "upL", "k" : 5, "id": "sp_5", "sp": 5, "wd": 3.1, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "h8L", "k" : 3, "id": "sp_6", "sp": 6, "wd": 2.6, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "rollC", "k" : 4, "id": "sp_7", "sp": 7, "wd": 2.1, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "pImm", "k" : 2, "id": "sp_8", "sp": 8, "wd": 3.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "iSp", "k" : 4, "id": "sp_9", "sp": 9, "wd": 4.1, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "hB", "k" : 3, "id": "sp_10", "sp": 10, "wd": 6.1, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "rEt", "k" : 4, "id": "sp_11", "sp": 11, "wd": 8.3, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "sqL", "k" : 2, "id": "sp_12", "sp": 12, "wd": 3.2, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "M", "k" : 5, "id": "sp_13", "sp": 13, "wd": 10.6, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "fTrn", "k" : 4, "id": "sp_14", "sp": 14, "wd": 4.7, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "trgle", "k" : 3, "id": "sp_15", "sp": 15, "wd": 8.3, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "sFin", "k" : 3, "id": "sp_16", "sp": 16, "wd": 4.8, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "loop", "k" : 5, "id": "sp_17", "sp": 17, "wd": 6.2, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "lnd", "k" : 0, "id": "sp_18", "sp": 18, "wd": 1, "start": 0, "stop": 0, "sel": false, "background": ""}
+                ]
+            },
+            {
+                "value": "F23", 
+                "label": "F23",
+                "minalt": -10,
+                "model" : "/leader/leader.obj",
+                "modelmaterials" : "/leader/leader.mtl",
+                "modelscale" : 2000,
+                "mans": [
+                    {"name" : "tkoff", "k" : 0, "id" : "sp_0", "sp": 0, "wd": 5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "keLoop", "k" : 5, "id" : "sp_1", "sp": 1, "wd": 6.6, "start": 0, "stop": 0, "sel": false, "background": ""},            
+                    {"name" : "stall", "k" : 4, "id": "sp_2", "sp": 2, "wd": 4, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "8roll", "k" : 4, "id": "sp_3", "sp": 3, "wd": 2.2, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "shark", "k" : 3, "id": "sp_4", "sp": 4, "wd": 4.2, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "SqLC", "k" : 5, "id": "sp_5", "sp": 5, "wd": 5.3, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "hB", "k" : 4, "id": "sp_6", "sp": 6, "wd": 4.8, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "h8", "k" : 5, "id": "sp_7", "sp": 7, "wd": 8.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "rEt", "k" : 3, "id": "sp_8", "sp": 8, "wd": 5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "ke45", "k" : 6, "id": "sp_9", "sp": 9, "wd": 3.8, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "rShark", "k" : 3, "id": "sp_10", "sp": 10, "wd": 5.4, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "r2FT", "k" : 6, "id": "sp_11", "sp": 11, "wd": 7.2, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "rThat", "k" : 2, "id": "sp_12", "sp": 12, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "spin", "k" : 5, "id": "sp_13", "sp": 13, "wd": 3.8, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "hC8", "k" : 4, "id": "sp_14", "sp": 14, "wd": 3.8, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "rCir", "k" : 5, "id": "sp_15", "sp": 15, "wd": 5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "hSqL", "k" : 2, "id": "sp_16", "sp": 16, "wd": 2.7, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "Av", "k" : 5, "id": "sp_17", "sp": 17, "wd": 6.4, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "lnd", "k" : 0, "id": "sp_18", "sp": 18, "wd": 11.8, "start": 0, "stop": 0, "sel": false, "background": ""}
+                ]
+            },
+            {
+                "value": "A23", 
+                "label": "A23",
+                "minalt": -10,
+                "model" : "/leader/leader.obj",
+                "modelmaterials" : "/leader/leader.mtl",
+                "modelscale" : 2000,
+                "mans": [                    
+                    {"name" : "tkOf", "id" : "sp_0", "sp": 0, "wd": 8.3, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "tHat", "id": "sp_1", "sp": 1, "wd": 6, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "hSqL", "id": "sp_2", "sp": 2, "wd": 4.3, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "hB", "id": "sp_3", "sp": 3, "wd": 6.9, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "hSqLC", "id": "sp_4", "sp": 4, "wd": 3.8, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "upL", "id": "sp_5", "sp": 5, "wd": 3.9, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "h8L", "id": "sp_6", "sp": 6, "wd": 2.4, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "rollC", "id": "sp_7", "sp": 7, "wd": 1.9, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "pImm", "id": "sp_8", "sp": 8, "wd": 3.1, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "iSp", "id": "sp_9", "sp": 9, "wd": 5.2, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "hB", "id": "sp_10", "sp": 10, "wd": 4.7, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "rEt", "id": "sp_11", "sp": 11, "wd": 6, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "sqL", "id": "sp_12", "sp": 12, "wd": 4.3, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "M", "id": "sp_13", "sp": 13, "wd": 9.7, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "trmb", "id": "sp_14", "sp": 14, "wd": 3.7, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "trgle", "id": "sp_15", "sp": 15, "wd": 8.2, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "sFin", "id": "sp_16", "sp": 16, "wd": 4.6, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "loop", "id": "sp_17", "sp": 17, "wd": 5.3, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "lnd", "id": "sp_18", "sp": 18, "wd": 3, "start": 0, "stop": 0, "sel": false, "background": ""}
+                ]
+            },
+            {
+                "value": "P21", 
+                "label": "P21",
+                "minalt": -10,
+                "model" : "/osbipe2/bipe2.obj",
+                "modelmaterials" : "/osbipe2/bipe2.mtl",
+                "modelscale" : 2000,
+                "comments": "name will be displayed in the splitter, id must be sp_X where X is the maneuver id that must start from 0, wd - width in %. Total wds must add to 100%, use 0 fro stop and set sel to false",
+                "mans": [                    
+                    {"name" : "tkoff", "id" : "sp_0", "sp": 0, "wd": 6.4, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "v8", "id": "sp_1", "sp": 1, "wd": 10.7, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "stall", "id": "sp_2", "sp": 2, "wd": 5.2, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "sqL", "id": "sp_3", "sp": 3, "wd": 7.7, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "9", "id": "sp_4", "sp": 4, "wd": 6, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "ke", "id": "sp_5", "sp": 5, "wd": 1.7, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "sS", "id": "sp_6", "sp": 6, "wd": 2.6, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "golf", "id": "sp_7", "sp": 7, "wd": 7.2, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "sFin", "id": "sp_8", "sp": 8, "wd": 5.8, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "dImm", "id": "sp_9", "sp": 9, "wd": 8.7, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "hB", "id": "sp_10", "sp": 10, "wd": 5.7, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "rollC", "id": "sp_11", "sp": 11, "wd": 2.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "tHat", "id": "sp_12", "sp": 12, "wd": 6.2, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "Z", "id": "sp_13", "sp": 13, "wd": 5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "com", "id": "sp_14", "sp": 14, "wd": 4.2, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "rollC", "id": "sp_15", "sp": 15, "wd": 1.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "sqL", "id": "sp_16", "sp": 16, "wd": 3.4, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "aV", "id": "sp_17", "sp": 17, "wd": 6.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "lnd", "id": "sp_18", "sp": 18, "wd": 3, "start": 0, "stop": 0, "sel": false, "background": ""}
+                ]
+            },
+            {
+                "value": "F21", 
+                "label": "F21",
+                "minalt": -10,
+                "model" : "/osbipe2/bipe2.obj",
+                "modelmaterials" : "/osbipe2/bipe2.mtl",
+                "modelscale" : 2000,
+                "mans": [
+                    {"name" : "tkoff", "id" : "sp_0", "sp": 0, "wd": 3, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "golf", "id" : "sp_1", "sp": 1, "wd": 8.3, "start": 0, "stop": 0, "sel": false, "background": ""},            
+                    {"name" : "cub8", "id": "sp_2", "sp": 2, "wd": 4.4, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "circle", "id": "sp_3", "sp": 3, "wd": 6.42, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "tHat", "id": "sp_4", "sp": 4, "wd": 6.2, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "hB", "id": "sp_5", "sp": 5, "wd": 5.9, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "v8", "id": "sp_6", "sp": 6, "wd": 6.1, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "stall", "id": "sp_7", "sp": 7, "wd": 8.8, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "9", "id": "sp_8", "sp": 8, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "tHat", "id": "sp_9", "sp": 9, "wd": 5.55, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "1/2sqL", "id": "sp_10", "sp": 10, "wd": 4.3, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "45Line", "id": "sp_11", "sp": 11, "wd": 2.8, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "8loop", "id": "sp_12", "sp": 12, "wd": 4.3, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "loop", "id": "sp_13", "sp": 13, "wd": 7, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "spin", "id": "sp_14", "sp": 14, "wd": 5.4, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "rollC", "id": "sp_15", "sp": 15, "wd": 1.8, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "fTurn", "id": "sp_16", "sp": 16, "wd": 4.7, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "circle", "id": "sp_17", "sp": 17, "wd": 7.23, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "lnd", "id": "sp_18", "sp": 18, "wd": 3, "start": 0, "stop": 0, "sel": false, "background": ""}
+                ]
+            },
+                        {
+                "value": "A20", 
+                "label": "A20",
+                "minalt": -10,
+                "model" : "/osbipe2/bipe2.obj",
+                "modelmaterials" : "/osbipe2/bipe2.mtl",
+                "modelscale" : 2000,
+                "mans": [                    
+                    {"name" : "tkoff", "id" : "sp_0", "sp": 0, "wd": 3, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "v8", "id": "sp_1", "sp": 1, "wd": 10, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "stall", "id": "sp_2", "sp": 2, "wd": 5.1, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "sqL", "id": "sp_3", "sp": 3, "wd": 7.6, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "9", "id": "sp_4", "sp": 4, "wd": 6, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "ke", "id": "sp_5", "sp": 5, "wd": 3, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "sS", "id": "sp_6", "sp": 6, "wd": 3.3, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "golf", "id": "sp_7", "sp": 7, "wd": 6.6, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "shark", "id": "sp_8", "sp": 8, "wd": 6, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "dImm", "id": "sp_9", "sp": 9, "wd": 8, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "hB", "id": "sp_10", "sp": 10, "wd": 6.2, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "rollC", "id": "sp_11", "sp": 11, "wd": 2.8, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "tHat", "id": "sp_12", "sp": 12, "wd": 6.9, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "Z", "id": "sp_13", "sp": 13, "wd": 5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "com", "id": "sp_14", "sp": 14, "wd": 4.7, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "rollC", "id": "sp_15", "sp": 15, "wd": 2, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "sqL", "id": "sp_16", "sp": 16, "wd": 4.2, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "aV", "id": "sp_17", "sp": 17, "wd": 6.6, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "lnd", "id": "sp_18", "sp": 18, "wd": 3, "start": 0, "stop": 0, "sel": false, "background": ""}
+                ]
+            },            
+            { 
+                "value": "AUS Advanced 21", 
+                "label": "AUS Advanced 21",
+                "minalt": -10,
+                "model" : "/osbipe2/bipe2.obj",
+                "modelmaterials" : "/osbipe2/bipe2.mtl",
+                "modelscale" : 2000,
+                "mans": [                    
+                    {"name" : "tkoff", "id" : "sp_0", "sp": 0, "wd": 3, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "v8", "id": "sp_1", "sp": 1, "wd": 8.77, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "stall", "id": "sp_2", "sp": 2, "wd": 6.55, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "sqL", "id": "sp_3", "sp": 3, "wd": 7.56, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "immT", "id": "sp_4", "sp": 4, "wd": 2.55, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "ke", "id": "sp_5", "sp": 5, "wd": 2.22, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "sS", "id": "sp_6", "sp": 6, "wd": 3.83, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "golf", "id": "sp_7", "sp": 7, "wd": 8, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "shark", "id": "sp_8", "sp": 8, "wd": 5.4, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "dImm", "id": "sp_9", "sp": 9, "wd": 7.4, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "hB", "id": "sp_10", "sp": 10, "wd": 7.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "roll", "id": "sp_11", "sp": 11, "wd": 2, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "hRCub8", "id": "sp_12", "sp": 12, "wd": 5.17, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "Z", "id": "sp_13", "sp": 13, "wd": 6.12, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "spin", "id": "sp_14", "sp": 14, "wd": 7.34, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "2roll", "id": "sp_15", "sp": 15, "wd": 2, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "sqL", "id": "sp_16", "sp": 16, "wd": 3.3, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "inLoop", "id": "sp_17", "sp": 17, "wd": 8.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "lnd", "id": "sp_18", "sp": 18, "wd": 3, "start": 0, "stop": 0, "sel": false, "background": ""}
+                ]
+            },
+            { 
+                "value": "US AMA403 Advanced 22", 
+                "label": "US AMA403 Advanced 22",
+                "minalt": -10,
+                "model" : "/osbipe2/bipe2.obj",
+                "modelmaterials" : "/osbipe2/bipe2.mtl",
+                "modelscale" : 2000,
+                "mans": [                    
+                    {"name" : "tkoff", "id" : "sp_0", "sp": 0, "wd": 8.3, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "dbStal", "id": "sp_1", "sp": 1, "wd": 8.76, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "Tromb", "id": "sp_2", "sp": 2, "wd": 3.7, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "Pyram", "id": "sp_3", "sp": 3, "wd": 4.6, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "Humpt", "id": "sp_4", "sp": 4, "wd": 3.9, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "Aval", "id": "sp_5", "sp": 5, "wd": 4.75, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "rShark", "id": "sp_6", "sp": 6, "wd": 3.6, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "SlRol", "id": "sp_7", "sp": 7, "wd": 1.41, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "Stall", "id": "sp_8", "sp": 8, "wd": 3.7, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "THat", "id": "sp_9", "sp": 9, "wd": 3.61, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "hCubn", "id": "sp_10", "sp": 10, "wd": 2.8, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "BTie", "id": "sp_11", "sp": 11, "wd": 6.3, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "Amper", "id": "sp_12", "sp": 12, "wd": 4.7, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "SqCorn", "id": "sp_13", "sp": 13, "wd": 5.8, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "THat", "id": "sp_14", "sp": 14, "wd": 3.8, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "4Pt", "id": "sp_15", "sp": 15, "wd": 1.9, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "hSqr", "id": "sp_16", "sp": 16, "wd": 2.6, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "3tSpn", "id": "sp_17", "sp": 17, "wd": 3.8, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "lnd", "id": "sp_18", "sp": 18, "wd": 22, "start": 0, "stop": 0, "sel": false, "background": ""}
+                ]
+            },
+            { 
+                "value": "Generic", 
+                "label": "Generic",
+                "minalt": -10,
+                "model" : "/leader/leader.obj",
+                "modelmaterials" : "/leader/leader.mtl",
+                "modelscale" : 2000,
+                "mans": [                    
+                    {"name" : "tkoff", "id" : "sp_0", "sp": 0, "wd": 5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "1", "id": "sp_1", "sp": 1, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "2", "id": "sp_2", "sp": 2, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "3", "id": "sp_3", "sp": 3, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "4", "id": "sp_4", "sp": 4, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "5", "id": "sp_5", "sp": 5, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "6", "id": "sp_6", "sp": 6, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "7", "id": "sp_7", "sp": 7, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "8", "id": "sp_8", "sp": 8, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "9", "id": "sp_9", "sp": 9, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "10", "id": "sp_10", "sp": 10, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "11", "id": "sp_11", "sp": 11, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "12", "id": "sp_12", "sp": 12, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "13", "id": "sp_13", "sp": 13, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "14", "id": "sp_14", "sp": 14, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "15", "id": "sp_15", "sp": 15, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "16", "id": "sp_16", "sp": 16, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "17", "id": "sp_17", "sp": 17, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "18", "id": "sp_18", "sp": 18, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "19", "id": "sp_19", "sp": 19, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "20", "id": "sp_20", "sp": 20, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "lnd", "id": "sp_21", "sp": 21, "wd": 5, "start": 0, "stop": 0, "sel": false, "background": ""}
+                ]
+            }
+        ]
+    },
+    
+    {
+        "value": "IMAC",
+        "label": "IMAC",
+        "views": {
+            "default": {
+                "camera" : [-299.3,286.0,326.2],
+                "target" : [30.2,80.0,-232.6]
+            },
+            "judge": {
+                "camera" : [0, -2.2, 224],
+                "target" : [6, 214, -288]
+                },
+            "top": {
+                "camera" : [8.9,750.1,-105.1],
+                "target" : [9.4,209.3,-231.7]
+                },
+            "left": {
+                "camera" : [-550.1,188.1,-196.4],
+                "target" : [12.1,165.6,-229.6]
+                },
+            "right":    {
+                "camera" : [556.3,152.9,-184.2],
+                "target" : [4.3,173.9,-314.2]
+                },
+            "mid":  {
+                "camera" : [16.44, 118.33, 271.85],
+                "target" : [14.44, 139.33, -283.15]
+                }
+        },
+        "children": [
+            { 
+                "value": "Sportsman", 
+                "label": "Sportsman",
+                "minalt": -10,
+                "model" : "/thomas/model.obj",
+                "modelmaterials" : "/thomas/model.mtl",
+                "modelscale" : 4000,
+                "mans": [                    
+                    {"name" : "tkoff", "id" : "sp_0", "sp": 0, "wd": 5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "1", "id": "sp_1", "sp": 1, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "2", "id": "sp_2", "sp": 2, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "3", "id": "sp_3", "sp": 3, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "4", "id": "sp_4", "sp": 4, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "5", "id": "sp_5", "sp": 5, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "6", "id": "sp_6", "sp": 6, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "7", "id": "sp_7", "sp": 7, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "8", "id": "sp_8", "sp": 8, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "9", "id": "sp_9", "sp": 9, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "10", "id": "sp_10", "sp": 10, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "11", "id": "sp_11", "sp": 11, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "12", "id": "sp_12", "sp": 12, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "13", "id": "sp_13", "sp": 13, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "14", "id": "sp_14", "sp": 14, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "15", "id": "sp_15", "sp": 15, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "16", "id": "sp_16", "sp": 16, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "17", "id": "sp_17", "sp": 17, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "18", "id": "sp_18", "sp": 18, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "19", "id": "sp_19", "sp": 19, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "20", "id": "sp_20", "sp": 20, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "21", "id": "sp_21", "sp": 21, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "lnd", "id": "sp_22", "sp": 22, "wd": 5, "start": 0, "stop": 0, "sel": false, "background": ""}
+                ]
+            },                
+            
+            { 
+                "value": "Unlimited",
+                "label": "Unlimited",
+                "minalt": -2,
+                "model" : "/thomas/model.obj",
+                "modelmaterials" : "/thomas/model.mtl",
+                "modelscale" : 4000,
+                "mans": [                    
+                    {"name" : "tkoff", "id" : "sp_0", "sp": 0, "wd": 5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "1", "id": "sp_1", "sp": 1, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "2", "id": "sp_2", "sp": 2, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "3", "id": "sp_3", "sp": 3, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "4", "id": "sp_4", "sp": 4, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "5", "id": "sp_5", "sp": 5, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "6", "id": "sp_6", "sp": 6, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "7", "id": "sp_7", "sp": 7, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "8", "id": "sp_8", "sp": 8, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "9", "id": "sp_9", "sp": 9, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "10", "id": "sp_10", "sp": 10, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "11", "id": "sp_11", "sp": 11, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "12", "id": "sp_12", "sp": 12, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "13", "id": "sp_13", "sp": 13, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "14", "id": "sp_14", "sp": 14, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "15", "id": "sp_15", "sp": 15, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "16", "id": "sp_16", "sp": 16, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "17", "id": "sp_17", "sp": 17, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "18", "id": "sp_18", "sp": 18, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "19", "id": "sp_19", "sp": 19, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "20", "id": "sp_20", "sp": 20, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "21", "id": "sp_21", "sp": 21, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "lnd", "id": "sp_22", "sp": 22, "wd": 5, "start": 0, "stop": 0, "sel": false, "background": ""}
+                ]
+            },
+            { 
+                "value": "Generic", 
+                "label": "Generic",
+                "minalt": -10,
+                "model" : "/thomas/model.obj",
+                "modelmaterials" : "/thomas/model.mtl",
+                "modelscale" : 4000,
+                "mans": [                    
+                    {"name" : "tkoff", "id" : "sp_0", "sp": 0, "wd": 5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "1", "id": "sp_1", "sp": 1, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "2", "id": "sp_2", "sp": 2, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "3", "id": "sp_3", "sp": 3, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "4", "id": "sp_4", "sp": 4, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "5", "id": "sp_5", "sp": 5, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "6", "id": "sp_6", "sp": 6, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "7", "id": "sp_7", "sp": 7, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "8", "id": "sp_8", "sp": 8, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "9", "id": "sp_9", "sp": 9, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "10", "id": "sp_10", "sp": 10, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "11", "id": "sp_11", "sp": 11, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "12", "id": "sp_12", "sp": 12, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "13", "id": "sp_13", "sp": 13, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "14", "id": "sp_14", "sp": 14, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "15", "id": "sp_15", "sp": 15, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "16", "id": "sp_16", "sp": 16, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "17", "id": "sp_17", "sp": 17, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "18", "id": "sp_18", "sp": 18, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "19", "id": "sp_19", "sp": 19, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "20", "id": "sp_20", "sp": 20, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "21", "id": "sp_21", "sp": 21, "wd": 4.28, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "lnd", "id": "sp_22", "sp": 22, "wd": 5, "start": 0, "stop": 0, "sel": false, "background": ""}
+                ]
+            }
+        ]
+    },
+    {
+        "value": "F3C",
+        "label": "F3C",
+        "views": {
+            "default": {
+                "camera" : [1.6, 393.3, -48],
+                "target" : [1.6, -44, -48]
+            },
+            "judge": {
+                "camera" : [0.9,6.7,119.8],
+                "target" : [6, 40, -188]
+                },
+            "top": {
+                "camera" : [9.0,304.6,-52.5],
+                "target" : [9.1,-4.2,-75.9]
+                },
+            "left": {
+                "camera" : [-363.1,18.5,-78.9],
+                "target" : [47.0,62.8,-103.2]
+                },
+            "right":    {
+                "camera" : [303.1,28.2,-69.3],
+                "target" : [-91.9,62.4,-110.0]
+                },
+            "mid":  {
+                "camera" : [0.4,45.2,142.2],
+                "target" : [7.1,33.2,-285.8]
+                }
+        },
+        "children": [
+            { 
+                "value": "Preliminary", 
+                "label": "Preliminary",
+                "minalt" : -2,
+                "model" : "/heli/customHeli.obj",
+                "modelmaterials" : "/heli/customHeli.mtl",
+                "modelscale" : 10,
+                "mans": [      
+                    {"name" : "tkoff", "id" : "sp_0", "sp": 0, "wd": 5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "vor", "id": "sp_1", "sp": 1, "wd": 10, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "dia", "id": "sp_2", "sp": 2, "wd": 10, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "dca", "id": "sp_3", "sp": 3, "wd": 10, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "lwit", "id": "sp_4", "sp": 4, "wd": 10, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "ux", "id": "sp_5", "sp": 5, "wd": 10, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "orf", "id": "sp_6", "sp": 6, "wd": 10, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "rls", "id": "sp_7", "sp": 7, "wd": 10, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "ium", "id": "sp_8", "sp": 8, "wd": 10, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "aro", "id": "sp_9", "sp": 9, "wd": 10, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "lnd", "id": "sp_10", "sp": 10, "wd": 5, "start": 0, "stop": 0, "sel": false, "background": ""}
+                ]
+            },
+            { 
+                "value": "Final", 
+                "label": "Final",
+                "minalt" : -2,
+                "model" : "/heli/customHeli.obj",
+                "modelmaterials" : "/heli/customHeli.mtl",
+                "modelscale" : 10,
+                "mans": [
+                    {"name" : "tkoff", "id" : "sp_0", "sp": 0, "wd": 5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "vhp", "id": "sp_1", "sp": 1, "wd": 11.25, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "lep", "id": "sp_2", "sp": 2, "wd": 11.25, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "ctf", "id": "sp_3", "sp": 3, "wd": 11.25, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "dcfr", "id": "sp_4", "sp": 4, "wd": 11.25, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "dtrf", "id": "sp_5", "sp": 5, "wd": 11.25, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "3rls", "id": "sp_6", "sp": 6, "wd": 11.25, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "iumr", "id": "sp_7", "sp": 7, "wd": 11.25, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "aft", "id": "sp_8", "sp": 8, "wd": 11.25, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "lnd", "id": "sp_9", "sp": 9, "wd": 5, "start": 0, "stop": 0, "sel": false, "background": ""}
+                ]
+            },
+            { 
+                "value": "Generic", 
+                "label": "Generic",
+                "minalt" : -2,
+                "model" : "/heli/customHeli.obj",
+                "modelmaterials" : "/heli/customHeli.mtl",
+                "modelscale" : 10,
+                "mans": [                    
+                    {"name" : "tkoff", "id" : "sp_0", "sp": 0, "wd": 5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "1", "id": "sp_1", "sp": 1, "wd": 9, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "2", "id": "sp_2", "sp": 2, "wd": 9, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "3", "id": "sp_3", "sp": 3, "wd": 9, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "4", "id": "sp_4", "sp": 4, "wd": 9, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "5", "id": "sp_5", "sp": 5, "wd": 9, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "6", "id": "sp_6", "sp": 6, "wd": 9, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "7", "id": "sp_7", "sp": 7, "wd": 9, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "8", "id": "sp_8", "sp": 8, "wd": 9, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "9", "id": "sp_9", "sp": 9, "wd": 9, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "10", "id": "sp_10", "sp": 10, "wd": 9, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "lnd", "id": "sp_11", "sp": 11, "wd": 5, "start": 0, "stop": 0, "sel": false, "background": ""}
+                ]
+            },
+            { 
+                "value": "Generic0", 
+                "label": "Generic 0m",
+                "minalt" : 10,
+                "model" : "/heli/customHeli.obj",
+                "modelmaterials" : "/heli/customHeli.mtl",
+                "modelscale" : 10,
+                "mans": [                    
+                    {"name" : "tkoff", "id" : "sp_0", "sp": 0, "wd": 5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "1", "id": "sp_1", "sp": 1, "wd": 9, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "2", "id": "sp_2", "sp": 2, "wd": 9, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "3", "id": "sp_3", "sp": 3, "wd": 9, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "4", "id": "sp_4", "sp": 4, "wd": 9, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "5", "id": "sp_5", "sp": 5, "wd": 9, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "6", "id": "sp_6", "sp": 6, "wd": 9, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "7", "id": "sp_7", "sp": 7, "wd": 9, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "8", "id": "sp_8", "sp": 8, "wd": 9, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "9", "id": "sp_9", "sp": 9, "wd": 9, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "10", "id": "sp_10", "sp": 10, "wd": 9, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "lnd", "id": "sp_11", "sp": 11, "wd": 5, "start": 0, "stop": 0, "sel": false, "background": ""}
+                ]
+            }
+        ]
+    },
+    
+    {
+        "value": "F3S",
+        "label": "F3S",
+        "views": {
+            "default": {
+                "camera" : [-354.1,205.7,468.3],
+                "target" : [-84.7,139.5,-277.7]
+            },
+            "judge": {
+                "camera" : [-0.0,22.1,443.3],
+                "target" : [8.7,158.0,-300.5]
+                },
+            "top": {
+                "camera" : [0,760.3,-159.8],
+                "target" : [0,209.8,-233.6]
+                },
+            "left": {
+                "camera" : [-934.3,128.7,-163.8],
+                "target" : [-1.9,145.6,-291.7]
+                },
+            "right":    {
+                "camera" : [889.4,89.7,-170.5],
+                "target" : [-4.3,140.4,-268.3]
+                },
+            "mid":  {
+                "camera" : [17.3,119.5,511.9],
+                "target" : [14.4,139.3,-283.1]
+                }
+        },
+        "children": [
+            { 
+                "value": "Basic", 
+                "label": "Basic",
+                "minalt": -10,
+                "model" : "/jet/Jet.obj",
+                "modelmaterials" : "/jet/Jet.mtl",
+                "modelscale" : 150,
+                "mans": [                    
+                    {"name" : "tkoff", "id" : "sp_0", "sp": 0, "wd": 5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "1", "id": "sp_1", "sp": 1, "wd": 12.8, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "2", "id": "sp_2", "sp": 2, "wd": 12.8, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "3", "id": "sp_3", "sp": 3, "wd": 12.8, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "4", "id": "sp_4", "sp": 4, "wd": 12.8, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "5", "id": "sp_5", "sp": 5, "wd": 12.8, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "6", "id": "sp_6", "sp": 6, "wd": 12.8, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "7", "id": "sp_7", "sp": 7, "wd": 13.2, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "lnd", "id": "sp_8", "sp": 8, "wd": 5, "start": 0, "stop": 0, "sel": false, "background": ""}
+                ]
+            },                
+            
+            { 
+                "value": "Preliminary",
+                "label": "Preliminary",
+                "minalt": -10,
+                "model" : "/jet/Jet.obj",
+                "modelmaterials" : "/jet/Jet.mtl",
+                "modelscale" : 150,
+                "mans": [                    
+                    {"name" : "tkoff", "id" : "sp_0", "sp": 0, "wd": 5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "1", "id": "sp_1", "sp": 1, "wd": 6.9, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "2", "id": "sp_2", "sp": 2, "wd": 6.9, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "3", "id": "sp_3", "sp": 3, "wd": 6.9, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "4", "id": "sp_4", "sp": 4, "wd": 6.9, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "5", "id": "sp_5", "sp": 5, "wd": 6.9, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "6", "id": "sp_6", "sp": 6, "wd": 6.9, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "7", "id": "sp_7", "sp": 7, "wd": 6.9, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "8", "id": "sp_8", "sp": 8, "wd": 6.9, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "9", "id": "sp_9", "sp": 9, "wd": 6.9, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "10", "id": "sp_10", "sp": 10, "wd": 6.9, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "11", "id": "sp_11", "sp": 11, "wd": 6.9, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "12", "id": "sp_12", "sp": 12, "wd": 6.9, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "13", "id": "sp_13", "sp": 13, "wd": 7.2, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "lnd", "id": "sp_14", "sp": 14, "wd": 5, "start": 0, "stop": 0, "sel": false, "background": ""}
+                ]
+            },                
+            
+            { 
+                "value": "Final",
+                "label": "Final",
+                "minalt": -10,
+                "model" : "/jet/Jet.obj",
+                "modelmaterials" : "/jet/Jet.mtl",
+                "modelscale" : 150,
+                "mans": [                    
+                    {"name" : "tkoff", "id" : "sp_0", "sp": 0, "wd": 5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "1", "id": "sp_1", "sp": 1, "wd": 6, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "2", "id": "sp_2", "sp": 2, "wd": 6, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "3", "id": "sp_3", "sp": 3, "wd": 6, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "4", "id": "sp_4", "sp": 4, "wd": 6, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "5", "id": "sp_5", "sp": 5, "wd": 6, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "6", "id": "sp_6", "sp": 6, "wd": 6, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "7", "id": "sp_7", "sp": 7, "wd": 6, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "8", "id": "sp_8", "sp": 8, "wd": 6, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "9", "id": "sp_9", "sp": 9, "wd": 6, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "10", "id": "sp_10", "sp": 10, "wd": 6, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "11", "id": "sp_11", "sp": 11, "wd": 6, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "12", "id": "sp_12", "sp": 12, "wd": 6, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "13", "id": "sp_13", "sp": 13, "wd": 6, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "14", "id": "sp_14", "sp": 14, "wd": 6, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "15", "id": "sp_15", "sp": 15, "wd": 6, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "lnd", "id": "sp_16", "sp": 16, "wd": 5, "start": 0, "stop": 0, "sel": false, "background": ""}
+                ]
+            },            
+            { 
+                "value": "Generic", 
+                "label": "Generic",
+                "minalt": -10,
+                "model" : "/jet/Jet.obj",
+                "modelmaterials" : "/jet/Jet.mtl",
+                "modelscale" : 150,
+                "mans": [                    
+                    {"name" : "tkoff", "id" : "sp_0", "sp": 0, "wd": 5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "1", "id": "sp_1", "sp": 1, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "2", "id": "sp_2", "sp": 2, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "3", "id": "sp_3", "sp": 3, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "4", "id": "sp_4", "sp": 4, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "5", "id": "sp_5", "sp": 5, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "6", "id": "sp_6", "sp": 6, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "7", "id": "sp_7", "sp": 7, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "8", "id": "sp_8", "sp": 8, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "9", "id": "sp_9", "sp": 9, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "10", "id": "sp_10", "sp": 10, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "11", "id": "sp_11", "sp": 11, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "12", "id": "sp_12", "sp": 12, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "13", "id": "sp_13", "sp": 13, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "14", "id": "sp_14", "sp": 14, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "15", "id": "sp_15", "sp": 15, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "16", "id": "sp_16", "sp": 16, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "17", "id": "sp_17", "sp": 17, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "18", "id": "sp_18", "sp": 18, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "19", "id": "sp_19", "sp": 19, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "20", "id": "sp_20", "sp": 20, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "lnd", "id": "sp_21", "sp": 21, "wd": 5, "start": 0, "stop": 0, "sel": false, "background": ""}
+                ]
+            }
+        ]
+    },
+    
+    {
+        "value": "F2B",
+        "label": "F2B",
+        "views": {
+            "default": {
+                "camera" : [-15.7,12.4,46.2],
+                "target" : [78.9,-42.5,-201.0]
+            },
+            "judge": {
+                "camera" : [4.6,2.7,45.6],
+                "target" : [-14.7,50.2,-319.5]
+                },
+            "top": {
+                "camera" : [24.9,150.5,38.2],
+                "target" : [25.0,141.1,34.8]
+                },
+            "left": {
+                "camera" : [-51.1,8.2,5.0],
+                "target" : [160.3,-11.2,-7.5]
+                },
+            "right":    {
+                "camera" : [-51.1,8.2,5.0],
+                "target" : [160.3,-11.2,-7.5]
+                },
+            "mid":  {
+                "camera" : [6.2,7.6,46.3],
+                "target" : [-17.9,38.6,-320.3]
+                }
+        },
+        "children": [
+            { 
+                "value": "F2B", 
+                "label": "F2B",
+                "minalt": 5,
+                "model" : "/thomas/model.obj",
+                "modelmaterials" : "/thomas/model.mtl",
+                "modelscale" : 1,
+                "mans": [                    
+                    {"name" : "start", "id" : "sp_0", "sp": 0, "wd": 5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "tkoff", "id": "sp_1", "sp": 1, "wd": 6.4, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "3", "id": "sp_3", "sp": 3, "wd": 6.4, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "4", "id": "sp_4", "sp": 4, "wd": 6.4, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "5", "id": "sp_5", "sp": 5, "wd": 6.4, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "6", "id": "sp_6", "sp": 6, "wd": 6.4, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "7", "id": "sp_7", "sp": 7, "wd": 6.4, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "8", "id": "sp_8", "sp": 8, "wd": 6.4, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "9", "id": "sp_9", "sp": 9, "wd": 6.4, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "10", "id": "sp_10", "sp": 10, "wd": 6.4, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "11", "id": "sp_11", "sp": 11, "wd": 6.4, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "12", "id": "sp_12", "sp": 12, "wd": 6.4, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "13", "id": "sp_13", "sp": 13, "wd": 6.4, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "14", "id": "sp_14", "sp": 14, "wd": 6.4, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "15", "id": "sp_15", "sp": 15, "wd": 6.4, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "lnd", "id": "sp_16", "sp": 16, "wd": 5, "start": 0, "stop": 0, "sel": false, "background": ""}
+                ]
+            }
+        ]
+    },
+    
+    {
+        "value": "Generic",
+        "label": "Generic",
+        "views": {
+            "default": {
+                "camera" : [178.8,164.4,586.6],
+                "target" : [10.0,0.0,-215.0]
+            },
+            "judge": {
+                "camera" : [41.0,17.5,404.9],
+                "target" : [4.1,173.7,-295.3]
+                },
+            "top": {
+                "camera" : [4.2,713.5,12.7],
+                "target" : [4.7,160.0,-33.8]
+                },
+            "left": {
+                "camera" : [-498.4,75.3,-1.4],
+                "target" : [64.8,85.4,-20.2]
+                },
+            "right":    {
+                "camera" : [450.2,49.7,-6.1],
+                "target" : [-114.5,99.9,-31.3]
+                },
+            "mid":  {
+                "camera" : [2.3,121.5,553.0],
+                "target" : [15.5,115.5,-284.1]
+                }
+        },
+        "children": [
+            { 
+                "value": "Generic", 
+                "label": "Generic",
+                "minalt": -10,
+                "model" : "/osbipe2/bipe2.obj",
+                "modelmaterials" : "/osbipe2/bipe2.mtl",
+                "modelscale" : 2000,
+                "mans": [                    
+                    {"name" : "tkoff", "id" : "sp_0", "sp": 0, "wd": 5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "1", "id": "sp_1", "sp": 1, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "2", "id": "sp_2", "sp": 2, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "3", "id": "sp_3", "sp": 3, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "4", "id": "sp_4", "sp": 4, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "5", "id": "sp_5", "sp": 5, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "6", "id": "sp_6", "sp": 6, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "7", "id": "sp_7", "sp": 7, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "8", "id": "sp_8", "sp": 8, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "9", "id": "sp_9", "sp": 9, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "10", "id": "sp_10", "sp": 10, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "11", "id": "sp_11", "sp": 11, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "12", "id": "sp_12", "sp": 12, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "13", "id": "sp_13", "sp": 13, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "14", "id": "sp_14", "sp": 14, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "15", "id": "sp_15", "sp": 15, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "16", "id": "sp_16", "sp": 16, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "17", "id": "sp_17", "sp": 17, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "18", "id": "sp_18", "sp": 18, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "19", "id": "sp_19", "sp": 19, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "20", "id": "sp_20", "sp": 20, "wd": 4.5, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "lnd", "id": "sp_21", "sp": 21, "wd": 5, "start": 0, "stop": 0, "sel": false, "background": ""}
+                ]
+            }
+        ]
+    },
+    
+    {
+        "value": "Ground Test",
+        "label": "Ground Test",
+        "views": {
+            "default": {
+                "camera" : [14.2,8.8,42.3],
+                "target" : [-1.0,-15.6,-212.9]
+            },
+            "judge": {
+                "camera" : [33.0,37.7,96.3],
+                "target" : [-19.2,-17.0,-284.4]
+                },
+            "top": {
+                "camera" : [17.6,50.2,34.7],
+                "target" : [-36.1,-176.2,-179.4]
+                },
+            "left": {
+                "camera" : [33.0,37.7,96.3],
+                "target" : [-19.2,-17.0,-284.4]
+                },
+            "right":    {
+                "camera" : [17.6,50.2,34.7],
+                "target" : [-36.1,-176.2,-179.4]
+                },
+            "mid":  {
+                "camera" : [33.0,37.7,96.3],
+                "target" : [-19.2,-17.0,-284.4]
+                }
+        },
+        "children": [
+            { 
+                "value": "Test", 
+                "label": "Test",
+                "minalt": 0,
+                "model" : "/osbipe2/bipe2.obj",
+                "modelmaterials" : "/osbipe2/bipe2.mtl",
+                "modelscale" : 4000,
+                "mans": [                    
+                    {"name" : "1", "id" : "sp_0", "sp": 0, "wd": 25, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "2", "id": "sp_1", "sp": 1, "wd": 25, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "3", "id": "sp_2", "sp": 2, "wd": 25, "start": 0, "stop": 0, "sel": false, "background": ""},
+                    {"name" : "4", "id": "sp_3", "sp": 3, "wd": 25, "start": 0, "stop": 0, "sel": false, "background": ""}
+                ]
+            }
+        ]
+    }
+    
+]

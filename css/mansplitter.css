@@ -1,0 +1,71 @@
+/*
+This file is part of Flight Plotter.
+
+
+    Flight Plotter is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Flight Plotter is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Flight Plotter.  If not, see <https://www.gnu.org/licenses/>.
+*/
+/* 
+    Created on : 5 Oct. 2020, 8:03:19 am
+    Author     : artur
+*/
+
+.timeline {
+    white-space: nowrap;
+    padding: 19px 0 0px 0;
+    position: relative;
+}
+
+.entry {
+    display: inline-block;
+    vertical-align: top;
+    background: transparent;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    position: relative;
+    height: 24px;
+}
+
+.entry:before {
+    content: '';
+    display: block;
+    background: dodgerblue;
+    width: 4px;
+    height: 16px;
+    position: absolute;
+    top: -12px;
+}
+
+.entry h1 {
+    color: black;
+    font-size: 12px;
+    font-weight: bold;    
+}
+
+.bar {
+    height: 4px;
+    background: dodgerblue;
+    width: 100%;
+    position: absolute;
+    top: 15px;
+}
+
+.timingBar {
+    position: absolute;
+    left: 0%;
+    font-size: 10px;
+    font-weight: normal;
+    color: black;
+    background: transparent;
+}

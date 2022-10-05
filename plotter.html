@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<!--
+This file is part of Flight Plotter.
+
+
+    Flight Plotter is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Flight Plotter is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Flight Plotter.  If not, see <https://www.gnu.org/licenses/>.
+
+    Created on : Sep. 2020
+    Author     : Artur Uzieblo
+
+-->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <!-- disabled scaling so the controls do not 'disappear' from the screen, initial-scale has been 
+        experimentally set to a value that fonts are readable
+        -->
+        <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=0.75">
+        <title>Flight Plotter</title>
+<!--
+This file is part of Flight Plotter.
+
+Flight Plotter is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Flight Plotter is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Flight Plotter.  If not, see <https://www.gnu.org/licenses/>.
+
+
+Created on : Sep. 2020
+Author     : Artur Uzieblo
+-->
+        
+    <link href="libs/jquery-ui/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+    <link href="libs/bootstrap/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="libs/vue/bootstrap-vue.min.css" rel="stylesheet" type="text/css"/>
+    <link href="libs/element/theme-chalk/index.css" rel="stylesheet" type="text/css"/>
+    
+    <link href="libs/chartist/chartist.min.css" rel="stylesheet" type="text/css"/>
+    <link href="libs/three/main.css" rel="stylesheet" type="text/css"/>
+
+    <link href="css/fp.css" rel="stylesheet" type="text/css"/>
+    <link href="css/mansplitter.css" rel="stylesheet" type="text/css"/>
+
+    <script src="libs/jquery/jquery-3.5.1.min.js"></script>
+    <script src="libs/jquery-ui/jquery-ui.min.js"></script>
+    <script src="libs/vue/vue.min.js"></script>
+    <script src="libs/bootstrap/bootstrap-vue.min.js"></script>
+    <script src="libs/element/index.js"></script>
+    
+    <!-- the mapping does not work in Firefox and most likely MAc -->
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "./libs/three/three.module142.js",
+            "orbits": "./libs/three/controls/OrbitControls.js",
+            "objloader": "./libs/three/loaders/OBJLoader.js",
+            "mtlloader": "./libs/three/loaders/MTLLoader.js",
+            "bgutils": "./libs/three/utils/BufferGeometryUtils.js",
+            "rmesh": "./js/geometries/RibbonMesh.js"
+        }
+    }
+    </script>
+
+
+    <script src="libs/chartist/chartist.min.js"></script>
+    <script src="libs/FileSaver/FileSaver.js"></script>
+    <script src="libs/unpack/unpack.js"></script>
+
+    <!-- do not change the sequence below -->
+        <!-- read parameters from cookies -->
+    <script src="js/env.js"></script>
+        <!-- declare classes, do nothing -->
+    <script src="js/geometries/RibbonMesh.js" type="module"></script>
+    <script src="styles/components/pilot.js" type="module"></script>
+    <script src="styles/components/runway.js" type="module"></script>
+    <script src="styles/components/pole.js" type="module"></script>
+    <script src="styles/components/line.js" type="module"></script>
+    <script src="styles/components/grid.js" type="module"></script>
+    <script src="styles/components/sprite.js" type="module"></script>
+    <script src="styles/components/circle.js" type="module"></script>
+    <script src="styles/components/disc.js" type="module"></script>
+    <script src="styles/F2BStyle.js" type="module"></script>
+    <script src="styles/F3AStyle.js" type="module"></script>
+    <script src="styles/F3SStyle.js" type="module"></script>
+    <script src="styles/F3CStyle.js" type="module"></script>
+    <script src="styles/IMACStyle.js" type="module"></script>
+    <script src="styles/GenericStyle.js" type="module"></script>
+    <script src="styles/GroundStyle.js" type="module"></script>
+    <script src="styles/Style.js" type="module"></script>
+    <script src="js/attitude/attitudeBase.js" type="module"></script>
+    <script src="js/attitude/attitudeTop.js" type="module"></script>
+    <script src="js/attitude/attitudeFront.js" type="module"></script>
+    <script src="js/attitude/attitudeSide.js" type="module"></script>
+            <!-- instantiate plotter, wait for LOAD then init, update all GUI's -->
+    <script src="js/plotter.js" type="module"></script>
+        <!-- declare class  -->
+    <script src="js/binreader/binreader.js"></script>
+        <!-- declare class  -->
+    <script src="js/jsonreader/jhash.js"></script>
+    <script src="js/jsonreader/jsonreader.js"></script>
+        <!-- instantiate JSONReader and BINReader (with awaits for network) and add event handlers, manage splitter  -->
+    <script src="js/docready.js"></script>
+               
+    </head>
+    <body>
+        <!-- set cursor to loading, will be reset to default when loading is finished -->
+        <script>
+            $("body").css("cursor", "progress");
+        </script>
+
+        <!-- left up corner GUI -->
+        <div id="guiTL" style="z-index: 3; position: absolute; top: 0px; left: 0px; font-size: 10px; color: black">
+            <div>
+                <!--<a href="https://www.facebook.com/groups/flightcoach" style="color: navy;" target="_blank">Flight Coach</a>-->
+                <a href="https://flightcoach.org" style="color: navy;font-size: 12px">FlightCoach.org</a>
+            </div>
+            <div>
+                <a href="#" onclick="return false;" style="color: black;">File: {{jsonFileName}}</a>
+            </div>            
+            <div>
+                <a v-bind:href='originLink' style="color: navy;" target="_blank">Origin: {{originGPS.lat}}, {{originGPS.lng}}, {{originGPS.alt}}</a>                
+            </div>
+            <div>
+                <a v-bind:href='pilotLink' style="color: navy;" target="_blank">Pilot: {{pilotGPS.lat}}, {{pilotGPS.lng}}, {{pilotGPS.alt}}</a>                
+            </div>
+            <div>
+                <a v-bind:href='centerLink' style="color: navy;" target="_blank">Center: {{centerGPS.lat}}, {{centerGPS.lng}}, {{centerGPS.alt}}</a>                
+            </div>
+            <div>Total time: {{duration}}</div>
+            <div>Tkoff-Last: {{judgingduration}}</div>
+            <div>SW: {{SWVer}}/{{SWVerWeb}}</div>
+            <div>
+                <el-switch v-model="zooms" active-text="Views" active-color="#62fc03" 
+                    inactive-color="#fca903" inactive-text="" @change="openZooms()" style='margin: 10px;'></el-switch>
+            </div>
+            <!-- airplane attitude renderer -->
+            <div v-show='zooms'>
+                <div class='views'>
+                    <div class='views' id='attitudeTop'></div>
+                    <div class='topleft views'>Top</div>
+                    <div class='pilot'>Pilot</div>
+                </div>
+                <div class='views'>
+                    <div class='views' id='attitudeFront'></div>
+                    <div class='topleft views'>Front</div>
+                    <div class='pilotF  views'>Pilot</div>
+                </div>
+                <div class='views'>
+                    <div class='views' id='attitudeSide'></div>
+                    <div class='topleft views'>Left</div>
+                    <div class='pilotR views'>Pilot</div>
+                </div>
+            </div>                        
+        </div>
+        
+        <!-- right top corner GUI -->
+        <div id="guiTR" style="position: absolute; z-index: 3; top: 0px; right: 0px;">            
+            <div style="margin-top: 2px">                
+                <el-button style="width: 100%; margin-right: 20px" @click="drawer=true" icon="el-icon-setting" type="primary" size='small' round>Settings</el-button>
+                <el-drawer title="Settings" :visible.sync="drawer" :with-header="true" modal-append-to-body="false" size="15%">
+                    <el-divider><i class="el-icon-setting"></i></el-divider>
+                    <el-row>
+                        <label style="font-size: 14px; margin: 5px">Ribbon</label>
+                        <el-input-number style="float: right; margin-right: 5px" size="mini" v-model="wingspan" @change="wingspanChange" :min="1" :max="20" :step="1"></el-input-number>
+                    </el-row>
+                    <el-row>
+                        <label style="font-size: 14px; margin: 5px">Model</label>
+                        <el-input-number style="float: right; margin-right: 5px" size="mini" v-model="modelwingspan" @change="modelwingspanChange" :min="2" :max="50" :step="2"></el-input-number>
+                    </el-row>
+                    <el-row>
+                        <label style="font-size: 14px; margin: 5px">Speed 1&frasl;{{dropFrames}}</label>
+                        <el-input-number style="float: right; margin-right: 5px" size="mini" v-model="dropFrames" @change="setDropFrames"
+                                         :min="1" :max="20" :step="1"></el-input-number>
+                    </el-row>
+                    <el-row>
+                        <label style="font-size: 14px; margin: 5px">Graphics Performance</label>
+                        <el-checkbox style="float: right; margin-right: 5px" v-model="performance" @change="setPerformance">Slow</el-checkbox>
+                    </el-row>
+
+                    <el-divider><i class="el-icon-rank"></i></el-divider>
+                    <el-row>
+                        <label style="font-size: 14px; margin: 5px">Origin N</label>
+                        <el-input-number style="float: right; margin-right: 5px" size="mini" v-model="moveOriginN" @change="originNChange" :min="-30" :max="30" :step="1"></el-input-number>
+                    </el-row>
+                    <el-row>
+                        <label style="font-size: 14px; margin: 5px">Origin E</label>
+                        <el-input-number style="float: right; margin-right: 5px" size="mini" v-model="moveOriginE" @change="originEChange" :min="-30" :max="30" :step="1"></el-input-number>
+                    </el-row>
+                    <el-row>
+                        <label style="font-size: 14px; margin: 5px">Origin D</label>
+                        <el-input-number style="float: right; margin-right: 5px" size="mini" v-model="moveOriginD" @change="originDChange" :min="-30" :max="30" :step="1"></el-input-number>
+                    </el-row>
+                </el-drawer>
+            </div>
+            <div style="margin-top: 10px">
+                <el-row v-show='parameters'>
+                    <el-button type='primary' size='small' @click='judgeView' icon="el-icon-top" round style="width: 100%">&nbsp;Judge&nbsp;&nbsp;</el-button>
+                </el-row>
+                <el-row v-show='parameters'>
+                    <el-button type='primary' size='small' @click='topView' icon="el-icon-bottom"  round style="width: 100%">&nbsp;Top&nbsp;&nbsp;&nbsp;&nbsp;</el-button>
+                </el-row>
+                <el-row v-show='parameters'>
+                    <el-button type='primary' size='small' @click='leftView' icon="el-icon-right"  round style="width: 100%">&nbsp;Left&nbsp;&nbsp;&nbsp;</el-button>
+                </el-row>                    
+                <el-row v-show='parameters'>
+                    <el-button type='primary' size='small' @click='rightView' icon="el-icon-back"  round style="width: 100%">&nbsp;Right&nbsp;&nbsp;</el-button>
+                </el-row>                    
+                <el-row v-show='parameters'>
+                    <el-button type='primary' size='small' @click='midHeightView' icon="el-icon-rank"  round style="width: 100%">&nbsp;Mid&nbsp;&nbsp;&nbsp;&nbsp;</el-button>
+                </el-row>
+                <el-row v-show='parameters' style="margin-top: 10px">
+                    <!-- pressing the button triggers file selection modal to pop. Change in the modal triggers BIN conversion handler -->
+                    <input type="file" id="bin-file-selector" style="display: none;" accept=".bin, .BIN"/>
+                    <el-button id="bin_upload_button" type='danger' icon="el-icon-download" size='small' @click='document.getElementById("bin-file-selector").click();'
+                               round style="width: 100%">Load BIN</el-button>
+                </el-row>
+                <el-row v-show='parameters'>
+                    <!-- pressing the button triggers file selection modal to pop. Change in the modal triggers JSON conversion handler processJSONH(event) -->
+                    <input type="file" id="file-selector" style="display: none;" accept=".json"/>
+                    <el-button type='success' size='small' icon="el-icon-download" @click='document.getElementById("file-selector").click();' 
+                               round style="width: 100%">Open JSON</el-button>
+                </el-row>
+                <el-row v-show='parameters'>
+                    <el-button type='warning' size='small' icon="el-icon-upload2" @click='saveFlight()' round style="width: 100%">Save JSON</el-button>
+                </el-row>
+                <el-row v-show='parameters'>
+                    <el-button type='success' size='small' @click='document.getElementById("templateModal").style.display="block";' 
+                               icon="el-icon-document" round style="width: 100%">Template</el-button>
+                </el-row>
+                <el-row v-show='parameters'>
+                    <a href="#" id="downloader" @click="download()" download="flight-.png"></a>
+                    <el-button type='success' size='small' @click="download(); document.getElementById('downloader').click();" 
+                               icon="el-icon-document" round style="width: 100%">Save Image</el-button>
+                </el-row>
+                <el-row v-show='parameters'>
+                    <el-button type='primary' size='small' @click='window.open("https://flightcoach.org/analysing_your_flight/", "_blank")' 
+                               icon="el-icon-help" round style="width: 100%">Manual</el-button>
+                </el-row>
+                <!-- Show/hide Switch -->
+                <el-row style="margin-top: 10px">
+                    <el-switch style="float: right" v-model="parameters" active-text="Show" active-color="#62fc03" 
+                               inactive-color="#fca903" inactive-text="Hide" @change="setActive()" style='margin: 20px;'></el-switch>                    
+                </el-row>                
+                <!--
+                <el-row>
+                    <br>
+                    <form target="_blank" action="https://www.paypal.com/donate" method="post" target="_top" style="text-align:center">
+                        <input type="hidden" name="business" value="FHD6RKDWQCWW4" />
+                        <input type="hidden" name="item_name" value="Flight Coach Operations" />
+                        <input type="hidden" name="currency_code" value="AUD" />
+                        <input type="image" src="https://www.paypalobjects.com/en_AU/i/btn/btn_donate_SM.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+                        <img alt="" border="0" src="https://www.paypal.com/en_AU/i/scr/pixel.gif" width="1" height="1" />
+                    </form>
+                </el-row>
+                -->
+                <!--
+                <el-row v-show='parameters'>
+                    <span style="font-size: 10px">{{camera}}</span>
+                </el-row>
+                <el-row v-show='parameters'>
+                    <span style="font-size: 10px">{{target}}</span>
+                </el-row>
+                -->
+
+            </div>
+        </div>
+        
+        <!-- left bottom corner GUI -->
+        <div id="guiBL" style="position: absolute; z-index: 3; bottom: 0px; left: 0px; width: 100%">
+            <div>
+                <!-- Show/hide Switch -->
+                <el-row>
+                    <el-switch v-model="attGraph" active-text="Att" active-color="#62fc03" 
+                               inactive-color="#fca903" inactive-text="" @change="openAtt()" style='margin: 10px;'></el-switch>
+                    <el-switch v-model="velGraph" active-text="Vel" active-color="#62fc03" 
+                               inactive-color="#fca903" inactive-text="" @change="openVel()" style='margin: 10px;'></el-switch>
+                    <el-switch style="" v-model="splitter" active-text="Spl" active-color="#62fc03" 
+                               inactive-color="#fca903" inactive-text="" @change="openSplitter()" style='margin: 10px;'></el-switch> 
+                    <el-switch v-show='splitter' style="" v-model="splitterMode" active-text="M" active-color="#62fc03" 
+                               inactive-color="#62fc03" inactive-text="1" @change="setSplitterMode()" style='margin: 10px;'></el-switch>
+                </el-row>
+                <el-row>
+                    <el-button v-show='splitterbuttons' type="primary" icon="el-icon-arrow-left" @click='splitLeft()' circle></el-button>                    
+                    <el-button v-show='splitterbuttons' type="success" icon="el-icon-minus" @click='decreaseStop()' circle></el-button>
+                    <el-button v-show='splitterbuttons' type="success" icon="el-icon-plus" @click='increaseStop()' circle></el-button>
+                    <el-button v-show='splitterbuttons' type="primary" icon="el-icon-arrow-right" @click='splitRight()' circle></el-button>
+                    <el-divider v-show='splitterbuttons' direction="vertical"></el-divider>
+                    <el-button v-show='buttons' type="warning" icon="el-icon-d-arrow-left" @click='model1st' circle></el-button>
+                    <el-button v-show='buttons' type="warning" icon="el-icon-back" @click='modelPrev' circle></el-button>                    
+                    <el-button v-show='buttons' type="warning" icon="el-icon-right" @click='modelNext' circle></el-button>
+                    <el-button v-show='buttons' type="warning" icon="el-icon-d-arrow-right" @click='modelLast' circle></el-button>
+                    <el-button v-show='buttons' type="danger" icon="el-icon-video-play" @click='modelRun' circle></el-button>
+                </el-row>
+                <el-row v-show='splitter' style="background: white; opacity: 0.8;">
+                    <div class="bar"></div>
+                    <template v-for="tm in timing">
+                        <div class="timingBar" v-bind:style="{left: tm.left + '%'}">{{tm.val}}</div>
+                    </template>
+                    <div class="timeline">
+                        <template v-for="man in mans">   
+                            <div class="entry" v-bind:style="{width: man.wd + '%', background: man.background}" v-bind:id="man.id">
+                                <h1 v-bind:sp="man.sp" @click.stop.prevent="splitsF(man.sp)">{{man.name}}</h1>
+                            </div>
+                        </template>
+                    </div>
+                </el-row>
+                <el-row  v-show='attGraph'>
+                    <div style="background: beige; opacity: 0.8; margin: -2px; padding: 0px;">
+                        <label style="background: beige; color: red; font-size: 10px; margin: 5px">Roll: {{roll}}&deg;</label>
+                        <label style="background: beige; color: blue; font-size: 10px; margin: 0px">Pitch: {{pitch}}&deg;</label>
+                        <label style="background: beige; color: green; font-size: 10px; margin: 0px">Yaw: {{yaw}}&deg;</label>
+                    </div>
+                </el-row>
+                <el-row  v-show='attGraph'>
+                    <div id="attgraph" class="ct-chart" style="background-color: rgba(256,256,256,0.8); height: 160px"></div>
+                </el-row>
+                <el-row  v-show='velGraph'>
+                    <div style="background: beige; opacity: 0.8; margin: -2px; padding: 0px;">
+                        <label style="background: beige; color: red; font-size: 10px; margin: 5px">Average</label>
+                        <label style="background: beige; color: blue; font-size: 10px; margin: 0px">Speed: {{speed}}[km/h]</label>
+                    </div>
+                </el-row>
+                <el-row  v-show='velGraph'>
+                    <div id="velgraph" class="ct-chart" style="background-color: rgba(256,256,256,0.8); height: 160px"></div>
+                </el-row>
+            </div>
+        </div>
+
+        
+        <!-- The Binfile Modal -->
+        <div id="siteModal" class="modal" style="z-index: 4;">
+          <!-- Modal content -->
+            <div class="modal-content">
+                
+                <div class="modal-header">
+                    <span>Schedule and Site Selection</span>
+                    <span class="close" v-on:click="close">X</span>
+                </div>
+                
+                <div class="modal-body">
+                    
+                    <span style="font-weight: bold">Schedule:</span>
+                    <el-cascader size="mini" style="width: 100%" placeholder="Select Schedule" :clearable="true" :show-all-levels="false" filterbale
+                        v-model="schedule" :options="schedules" v-on:click="handleScheduleSelection"></el-cascader>
+
+                    <div v-if='selectSite'>                        
+                        <div style="font-size: 12px">
+                            <span>No site or more than one site has been found in the proximity of the origin. Select the site or provide GPS coordinates manually. 
+                                The coordinates must be within 50m from the origin.</span>
+                        </div>
+                        </br>
+                        <div style="font-size: 12px">
+                            <a v-bind:href='originLink' style="color: black;" target="Origin" rel="noopener noreferrer">Origin: {{originGPS.lat}}, {{originGPS.lng}}, {{originGPS.alt}}</a>                            
+                        </div>
+                        </br>
+                        <div>
+                            <span style="font-weight: bold">Site selection: </span>
+                        </div>
+                        <div>
+                            <el-cascader size="mini" style="width: 100%" placeholder="Select Site" :clearable="true" :show-all-levels="true" filterbale
+                                     v-model="siteSel" :options="sites" @change="siteSelection"></el-cascader>
+                            <span style="font-weight: bold">Override: </span>
+                            <el-row v-if="siteSel[0] === ''">
+                                <el-button id="copyOrigin" type='warning' size='mini' round v-on:click="copyOrigin">Copy Origin</el-button>
+                                <el-button id="copyClip" type='warning' size='mini' round v-on:click="readClip">Read Clipboard</el-button>
+                            </el-row>
+                            <el-row>                    
+                                <el-tag type="info">&nbsp;Pilot</el-tag>
+                                <el-input placeholder="Lat" style="width: 33%" size="mini" v-model="pilotGPS.lat" @change="manual"></el-input>
+                                <el-input placeholder="Lng" style="width: 33%" size="mini" v-model="pilotGPS.lng" @change="manual"></el-input>
+                            </el-row>
+                            <el-row>                    
+                                <el-tag type="info">Center</el-tag>
+                                <el-input placeholder="Lat" style="width: 33%" size="mini" v-model="centerGPS.lat" @change="manual"></el-input>
+                                <el-input placeholder="Lng" style="width: 33%" size="mini" v-model="centerGPS.lng" @change="manual"></el-input>
+                            </el-row>
+                        </div>
+                    </div>
+                    
+                    <div v-else>
+                        <div>
+                            <span style="font-weight: bold">Site: </span>
+                        </div>
+                        <div>
+                            <span style="font-weight: bold">{{siteSel[0]}}/{{siteSel[1]}}/{{siteSel[2]}}/{{siteSel[3]}}</span>
+                        </div>
+                        <div style="font-size: 12px">
+                            <a v-bind:href='pilotLink' style="color: black;" target="Pilot" rel="noopener noreferrer">Pilot : {{pilotGPS.lat}}, {{pilotGPS.lng}}, {{pilotGPS.alt}}</a>                
+                        </div>
+                        <div style="font-size: 12px">
+                            <a v-bind:href='centerLink' style="color: black;" target="Center" rel="noopener noreferrer">Center: {{centerGPS.lat}}, {{centerGPS.lng}}, {{centerGPS.alt}}</a>                
+                        </div>
+                        <div style="font-size: 12px">
+                            <a v-bind:href='originLink' style="color: black;" target="Origin" rel="noopener noreferrer">Origin: {{originGPS.lat}}, {{originGPS.lng}}, {{originGPS.alt}}</a>                
+                        </div>
+                        </br>
+                        <div style="font-size: 12px">
+                            <span>The above selection can be changed here or position manually overridden below:</span>                            
+                        </div>
+                        <div>
+                            <el-cascader size="mini" style="width: 100%" placeholder="Select Site" :clearable="true" :show-all-levels="true" filterbale
+                                     v-model="siteSel" :options="sites" @change="siteSelection"></el-cascader>
+                            <template v-if="siteSel[0] === ''">
+                                <el-button id="copyOrigin" type='warning' size='mini' round v-on:click="copyOrigin">Copy Origin</el-button>
+                                <el-button id="copyClip" type='warning' size='mini' round v-on:click="readClip">Read Clipboard</el-button>
+                            </template>                                
+                            <el-row>                    
+                                <el-tag type="info">&nbsp;Pilot</el-tag>
+                                <el-input placeholder="Lat" style="width: 33%" size="mini" v-model="pilotGPS.lat" @change="manual"></el-input>
+                                <el-input placeholder="Lng" style="width: 33%" size="mini" v-model="pilotGPS.lng" @change="manual"></el-input>
+                            </el-row>
+                            <el-row>                    
+                                <el-tag type="info">Center</el-tag>
+                                <el-input placeholder="Lat" style="width: 33%" size="mini" v-model="centerGPS.lat" @change="manual"></el-input>
+                                <el-input placeholder="Lng" style="width: 33%" size="mini" v-model="centerGPS.lng" @change="manual"></el-input>
+                            </el-row>
+                        </div>
+                    </div>                    
+                </div>
+                
+                <div class="modal-footer">
+                    <el-button id="convertBtn" type='success' size='medium' round v-on:click="processBin_part2">Submit</el-button>
+                </div>
+                
+            </div>
+        </div>
+        
+        <!-- The Template Modal -->
+        <div id="templateModal" class="modal" style="z-index: 4;">
+          <!-- Modal content -->
+            <div class="modal-content">
+                
+                <div class="modal-header">
+                    <span>Template Selection</span>
+                    <span class="close" v-on:click="close">X</span>
+                </div>
+                
+                <div class="modal-body">
+                    <el-cascader size="mini" style="width: 100%" placeholder="Select Template" :clearable="true" :show-all-levels="false" filterbale
+                        v-model="template" :options="templates" v-on:click="handleTemplateSelection"></el-cascader>
+                                        
+                </div>
+                <div class="modal-footer">
+                    <el-button id="selectTBtn" type='success' size='medium' round v-on:click="selectedTemplate">Submit</el-button>
+                </div>
+                
+            </div>
+        </div>
+
+        <!-- The Score Modal -->
+        <div id="scoreModal" class="modal" style="z-index: 4; visibility: hidden">
+        </div>            
+                
+        <!-- central renderer GUI -->
+        <div id='renderer' style="z-index: 1; position: absolute; top: 0px; left: 0px;"></div>       
+                
+    <!-- inject vue elements last -->
+    <script src="vue/vue-gui-TR.js"></script>
+    <script src="vue/vue-gui-BL.js"></script>
+    <script src="vue/vue-gui-TL.js"></script>
+    <script src="vue/vue-gui-SM.js"></script>
+    <script src="vue/vue-gui-ScM.js"></script>
+    <script src="vue/vue-gui-TM.js"></script>
+    <script src="vue/vue-gui-Inst.js"></script>
+                       
+    </body>
+</html>
