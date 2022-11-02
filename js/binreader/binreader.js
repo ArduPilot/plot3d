@@ -513,19 +513,16 @@ class BinReader {
         var un = {};
         this.data = [];
 
-        // start looking for XKF1 blocks, start from 0
-        var xkf = "a395" + this.dechex(this.fmtcodes['XKF1']['code']);    // type XKF1, QBccCfffffffccceTimeUS,C,Roll,Pitch,Yaw,VN,VE,VD,dPD,PN,PE,PD,GX,GY,GZ                                                       //QccCfffffffccceTimeUS,Roll,Pitch,Yaw,VN,VE,VD,dPD,PN,PE,PD,GX,GY,GZ,O
-        var xkfbytes = this.hex2bin(xkf);
-        var xkfunpack = 'C2header/Ctype/QTime/Ccore/sRoll/sPitch/SYaw/fVN/fVE/fVD/fdPD/fPN/fPE/fPD';
-        if ( this.fmtcodes['XKF1']['format'].indexOf('QB') < 0 )    
-            xkfunpack = 'C2header/Ctype/QTime/sRoll/sPitch/SYaw/fVN/fVE/fVD/fdPD/fPN/fPE/fPD';
-        
+        // start looking for pose blocks, start from 0
+        var msgtype = "POST";
+        var pose = "a395" + this.dechex(this.fmtcodes[msgtype]['code']);
+        var posebytes = this.hex2bin(pose);
+        var poseunpack = 'C2header/Ctype/QTime/fPN/fPE/fPD/fQ1/fQ2/fQ3/fQ4/fRoll/fPitch/fYaw';
+
         // origin
         let orgn = "a395" + this.dechex(this.fmtcodes['ORGN']['code']);    // name:ORGN, type:QBLLe,TimeUS,Type,Lat,Lng,Alt
         let orgnbytes = this.hex2bin(orgn);
         let orgnunpack = 'C2header/Ctype/QTime/CType/lLat/lLng/lAlt'; // unpacking format (converting from binary to variables
-        if ( this.fmtcodes['ORGN']['format'].indexOf('QB') < 0 )    
-            orgnunpack = 'C2header/Ctype/QTime/lLat/lLng/lAlt'; // unpacking format (converting from binary to variables
         let posorgn = this.strpos(this.binstring, orgnbytes, pos + 1);
         let org = unpack(orgnunpack, this.binstring.slice(posorgn, posorgn + 500));
         this.orgGPS =   {
@@ -546,11 +543,11 @@ class BinReader {
 
             point = {};
 
-            pos = this.strpos(this.binstring, xkfbytes, pos + 1);        // XKF1       
+            pos = this.strpos(this.binstring, posebytes, pos + 1);        // POSE1       
 
             if (pos)   {
 
-                un = unpack(xkfunpack, this.binstring.slice(pos, pos + 500) );        // position, velocities and angles
+                un = unpack(poseunpack, this.binstring.slice(pos, pos + 500) );        // position, velocities and angles
 
                 if ( un['PN'] !== 0.0 
                     && un['PE'] !== 0.0 
@@ -560,14 +557,42 @@ class BinReader {
                         point.N     = un['PN'];
                         point.E     = un['PE'];
                         point.D     = un['PD'];
-                        point.VN    = un['VN'];
-                        point.VE    = un['VE'];
-                        point.VD    = un['VD'];
-                        point.r     = un['Roll']/100;
-                        point.p     = un['Pitch']/100;
-                        point.yw    = un['Yaw']/100;
-                        //point.wN    = unw['VWN'];
-                        //point.wE    = unw['VWE'];
+                        point.r     = un['Roll'];
+                        point.p     = un['Pitch'];
+                        point.yw    = un['Yaw'];
+                        this.data[this.count] = point;
+                        this.count++;
+                    }
+            }
+        }
+
+        // start looking for pose blocks, start from 0
+        var msgtype = "POSM";
+        var pose = "a395" + this.dechex(this.fmtcodes[msgtype]['code']);
+        var posebytes = this.hex2bin(pose);
+        pos = 1
+
+        while (pos !== false)  {
+
+            point = {};
+
+            pos = this.strpos(this.binstring, posebytes, pos + 1);        // POSE1       
+
+            if (pos)   {
+
+                un = unpack(poseunpack, this.binstring.slice(pos, pos + 500) );        // position, velocities and angles
+
+                if ( un['PN'] !== 0.0 
+                    && un['PE'] !== 0.0 
+                    && un['PD'] < minAlt )   {    // inverted as all altitudes increase towards -             
+                        // proceed only if PXs are non zero
+                        point.time  = un['Time'];
+                        point.N     = un['PN'];
+                        point.E     = un['PE'];
+                        point.D     = un['PD'];
+                        point.r     = un['Roll'];
+                        point.p     = un['Pitch'];
+                        point.yw    = un['Yaw'];
                         this.data[this.count] = point;
                         this.count++;
                     }
@@ -575,10 +600,10 @@ class BinReader {
         }
         
         if (this.count === 0)  {
-            console.log("did not find useful XKF1 data in BIN file. Please refer to FAQ pages.");
-            alert("BIN Converter did not find useful XKF1 data in the BIN file.\r\n\r\nPlease refer to FAQ pages.");
+            console.log("did not find useful pose data in BIN file. Please refer to FAQ pages.");
+            alert("BIN Converter did not find useful pose data in the BIN file.\r\n\r\nPlease refer to FAQ pages.");
         }   else {            
-            console.log("found " + this.count + " valid XKF1 position points");
+            console.log("found " + this.count + " valid pose position points");
         }
 
 
