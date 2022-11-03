@@ -53,6 +53,7 @@ var guiTR = new Vue({
         wingspan: 4,
         modelwingspan: 14,
         performance: !fpenv.getPerformance(),
+        showactual: fpenv.getShowActual(),
         dropFrames: fpenv.getDropFrames(),
         views: {
             "default": {
@@ -164,6 +165,10 @@ var guiTR = new Vue({
             plot.setCamera(this.views.mid.camera);
             plot.setTarget( this.views.mid.target );
         },
+
+        toggleActual : function()  {
+            plot.toggleActual();
+        },
         
         getCamera : function()  {
             if (plot !== null)
@@ -186,6 +191,17 @@ var guiTR = new Vue({
                 fpenv.setPerformance(false);
             }   else {
                 fpenv.setPerformance(true);
+            }            
+            fpenv.load();
+            location.reload();
+        },
+
+        setShowActual : function()  {
+            
+            if (this.showactual)   {
+                fpenv.setShowActual(true);
+            }   else {
+                fpenv.setShowActual(false);
             }            
             fpenv.load();
             location.reload();

@@ -60,6 +60,7 @@ var fpenv = (function() {
     var zooms = false;
     var zooms2 = false;
     let performance = true;
+    let showactual = true;
     var template = ['F3A', '23', 'P23_template_150.json'];   // default value
     var schedule = ['Generic', 'Generic'];    
     var schedules = [
@@ -179,6 +180,10 @@ var fpenv = (function() {
         ck = getCookie("FP[performance]");
         if (ck)
             performance = ck === 'false' ? false : true;
+
+        ck = getCookie("FP[showactual]");
+        if (ck)
+            showactual = ck === 'false' ? false : true;
         
         ck = getCookie("FP[schedule]");
         if (ck)
@@ -298,6 +303,7 @@ var fpenv = (function() {
             zooms = false;
             zooms2 = false;
             performance = true;
+            showactual = true;
             originGPS = {
                 lat: 0.00,
                 lng: 0.00,
@@ -310,7 +316,11 @@ var fpenv = (function() {
         getPerformance: function () { return performance; },
         setPerformance: function (pf) {             
             document.cookie = "FP[performance]="+JSON.stringify(pf)+";max-age=31536000;";},
-        
+
+        setShowActual: function (pf) {
+            document.cookie = "FP[showactual]="+JSON.stringify(pf)+";max-age=31536000;";},
+        getShowActual: function () { return showactual; },
+
         getSchedules: function () { return schedules; },
         
         getSchedule: function () { return schedule; },

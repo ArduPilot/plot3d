@@ -543,6 +543,9 @@ class Plotter {
         this.camera.updateProjectionMatrix();
         this.controls.update();
     }
+
+    toggleActual(arr) {
+    }
     
     getTargetX() {
         return this.controls !== null ? this.controls.target.x.toFixed(1) : "" ;

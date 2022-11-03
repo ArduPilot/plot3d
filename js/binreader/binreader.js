@@ -567,24 +567,25 @@ class BinReader {
         }
 
         // start looking for pose blocks, start from 0
-        var msgtype = "POSM";
-        var pose = "a395" + this.dechex(this.fmtcodes[msgtype]['code']);
-        var posebytes = this.hex2bin(pose);
-        pos = 1
+        if (fpenv.getShowActual()) {
+            var msgtype = "POSM";
+            var pose = "a395" + this.dechex(this.fmtcodes[msgtype]['code']);
+            var posebytes = this.hex2bin(pose);
+            pos = 1
 
-        while (pos !== false)  {
+            while (pos !== false)  {
 
-            point = {};
+                point = {};
 
-            pos = this.strpos(this.binstring, posebytes, pos + 1);        // POSE1       
+                pos = this.strpos(this.binstring, posebytes, pos + 1);        // POSE1
 
-            if (pos)   {
+                if (pos)   {
 
-                un = unpack(poseunpack, this.binstring.slice(pos, pos + 500) );        // position, velocities and angles
+                    un = unpack(poseunpack, this.binstring.slice(pos, pos + 500) );        // position, velocities and angles
 
-                if ( un['PN'] !== 0.0 
-                    && un['PE'] !== 0.0 
-                    && un['PD'] < minAlt )   {    // inverted as all altitudes increase towards -             
+                    if ( un['PN'] !== 0.0
+                         && un['PE'] !== 0.0
+                         && un['PD'] < minAlt )   {    // inverted as all altitudes increase towards -
                         // proceed only if PXs are non zero
                         point.time  = un['Time'];
                         point.N     = un['PN'];
@@ -596,6 +597,7 @@ class BinReader {
                         this.data[this.count] = point;
                         this.count++;
                     }
+                }
             }
         }
         
