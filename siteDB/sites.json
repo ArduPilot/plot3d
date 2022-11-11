@@ -1237,6 +1237,38 @@
         ]        
     },    
     {
+        "value": "Hungary",
+        "label": "Hungary",
+        "children": [
+            {
+                "value": "ARACE",
+                "label": "ARACE",
+                "children": [
+                    {
+                        "value": "ARACE Playground",
+                        "label": "ARACE Playground",
+                        "children": [
+                            {
+                                "value": "1",
+                                "label": "1",
+                                "pilotGPS": {
+                                    "lat": "47.52097",
+                                    "lng": "18.80809",
+                                    "alt": "198"
+                                },
+                                "centerGPS": {
+                                    "lat": "47.52178",
+                                    "lng": "18.80996",
+                                    "alt": "198"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
         "value": "France",
         "label": "France",
         "children": [
