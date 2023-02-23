@@ -233,6 +233,20 @@ class Plotter {
         });
         
     }
+
+    find_closest_cpos(utc_time, pa) {
+        var low = 0;
+        var high = pa.length-1;
+        while (low < high) {
+            var mid = Math.floor((low+high)/2);
+            if (utc_time > pa[mid].utc_time) {
+                low = mid + 1;
+            } else {
+                high = mid;
+            }
+        }
+        return low;
+    }
         
     advanceModel() {
         if (this.model === null)  return; // could not load model
@@ -255,10 +269,10 @@ class Plotter {
         this.moveCharts(cpos);
 
         if (this.model2 !== null) {
-            var pa2 = this.pathArray2
-            // alert("POS: " + this.pa[cpos].E + " " + pa2[cpos].E);
-            this.model2.rotation.set( -pa2[cpos].roll , -pa2[cpos].yaw - Math.PI, -pa2[cpos].pitch , "YZX");
-            this.model2.position.set( pa2[cpos].N, -pa2[cpos].D, pa2[cpos].E);
+            var pa2 = this.pa2
+            var cpos2 = this.find_closest_cpos(this.pa[cpos].utc_time, this.pa2)
+            this.model2.rotation.set( -pa2[cpos2].roll , -pa2[cpos2].yaw - Math.PI, -pa2[cpos2].pitch , "YZX");
+            this.model2.position.set( pa2[cpos2].N, -pa2[cpos2].D, pa2[cpos2].E);
         }
         
     }

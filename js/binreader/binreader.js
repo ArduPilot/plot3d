@@ -583,6 +583,7 @@ class BinReader {
                     // alert("PARSE NED: " + NED.N + " " + NED.E + " " + NED.D)
 
                     point.time  = un['Time'];
+                    point.utc_time = un['TSec'] + un['TUsec']*1.0e-6;
                     point.N     = NED.N;
                     point.E     = NED.E;
                     point.D     = NED.D;
