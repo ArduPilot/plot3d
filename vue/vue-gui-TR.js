@@ -54,6 +54,7 @@ var guiTR = new Vue({
         modelwingspan: 14,
         performance: !fpenv.getPerformance(),
         showactual: fpenv.getShowActual(),
+        showdual: fpenv.getShowDual(),
         dropFrames: fpenv.getDropFrames(),
         views: {
             "default": {
@@ -202,6 +203,17 @@ var guiTR = new Vue({
                 fpenv.setShowActual(true);
             }   else {
                 fpenv.setShowActual(false);
+            }            
+            fpenv.load();
+            location.reload();
+        },
+
+        setShowDual : function()  {
+            
+            if (this.showdual)   {
+                fpenv.setShowDual(true);
+            }   else {
+                fpenv.setShowDual(false);
             }            
             fpenv.load();
             location.reload();

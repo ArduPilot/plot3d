@@ -210,6 +210,16 @@ class Plotter {
             //{ time:0, N:0, E:0, D:-10, VN:0.0, VE:0.0, VD:0.0, r:-15, p:0, yw:90, ar:0, ap:0, ayw:0, wN:0, wE:0},
             //{ time:1, N:0, E:0, D:-10, VN:0.0, VE:0.0, VD:0.0, r:-15, p:0, yw:90, ar:0, ap:0, ayw:0, wN:0, wE:0}
         ];
+        this.pathArray2 = [       // complete flight data, set to stratting positon here
+            // airplane is initially set towards east
+            // data below is in NED system and considering that ribbon will be rotated 180 around X it will align
+            // N with X, Y with -D and E with Z (this.model.position.set( this.pa[0].N, -this.pa[0].D, this.pa[0].E) )
+            { time:0, N:55, E:40, D:-30, VN:0.0, VE:0.0, VD:0.0, r:-30, p:20, yw:70, ar:0, ap:0, ayw:0, wN:0, wE:0},
+            { time:1, N:55, E:40, D:-30, VN:0.0, VE:0.0, VD:0.0, r:-30, p:20, yw:70, ar:0, ap:0, ayw:0, wN:0, wE:0}
+            // F2B
+            //{ time:0, N:0, E:0, D:-10, VN:0.0, VE:0.0, VD:0.0, r:-15, p:0, yw:90, ar:0, ap:0, ayw:0, wN:0, wE:0},
+            //{ time:1, N:0, E:0, D:-10, VN:0.0, VE:0.0, VD:0.0, r:-15, p:0, yw:90, ar:0, ap:0, ayw:0, wN:0, wE:0}
+        ];
         
         //fpenv.reset();  // this invalidates all parameters passed to the program, needs to be reviewed, introduced with JSON
         fpenv.setStop(this.pathArray.length);
@@ -244,15 +254,75 @@ class Plotter {
         
     }
 
-    redrawRMC()    {   // Ribbon, Model, Chart
+    redrawRMC_path(path)    {
 
-        if (this.scene)    {
-                        
-            // check if there is any points to draw
-            this.pa = this.pathArray.slice(fpenv.getStart(), fpenv.getStop());  // show only subset
-            if (this.pa.length < 2) return;
+        this.pa = path.slice(fpenv.getStart(), fpenv.getStop());  // show only subset
+        if (this.pa.length < 2) return;
+
+        this.ribbon = this.rm.generate();
+        this.group.add( this.ribbon );
+        
+        // reload model if required
+        if ( this.modelloaded.localeCompare( fpenv.getModel() ) )   {
+            this.group.remove(this.model);
             
-                // clear old stuff
+            var that = this;
+            this.mloader.load( fpenv.getModelMaterials(), 
+                               function( materials ) {
+                                   materials.preload();
+                                   that.oloader.setMaterials( materials );
+                                   that.loadModel(that.oloader);
+                               },
+                               function (xhr) {},  // called when loading is in progresses
+                               function (error) {  // called when loading has errors
+                                   // on error, just load the model with no materials
+                                   that.loadModel(that.oloader);
+                               }
+                             );         
+            
+        } else if (this.model !== null)   {
+            // set model scale for existing one
+            this.setModel(this.model, fpenv.getModelScale() );                //fpenv.getModelScale()
+        }
+        
+        // update charts
+        this.updateCharts();
+        
+        // position group            
+        this.moveGroup(this.group);
+        
+        // reset model position to 0
+        fpenv.setModelPos(0);
+        this.advanceModel();
+        
+        // create box
+        this.box = this.styleR.getStyle(fpenv.getSchedule()[0]);            
+        this.scene.add( this.box );
+        // add RMC to scene
+        this.scene.add( this.group );
+        
+        // add Origin indicator
+        var geometry = new ConeGeometry(1.25, 2.5, 15 );
+        var material = new MeshMatcapMaterial({color: 0xff0000});
+        var pole = new Mesh(geometry, material);
+        pole.position.y = 1.25;
+        this.origin.add(pole);
+        // add label
+        var spOrigin = new Spritee( "Origin");
+        spOrigin.position.y = 1;
+        this.origin.add( spOrigin );
+        this.moveGroup(this.origin);
+        // add to scene
+        this.scene.add( this.origin );
+        
+        // draw everything
+        this.controls.update();
+        this.renderer.render(this.scene, this.camera);            
+    }
+
+    redrawRMC()    {   // Ribbon, Model, Chart
+        if (this.scene) {
+            // clear old stuff
             this.scene.remove( this.group );
             this.scene.remove( this.origin );
             this.scene.remove( this.box );
@@ -263,66 +333,10 @@ class Plotter {
             
             this.group = new Group(); // groups ribbon and model together            
             this.origin = new Group(); //                                    
-            this.ribbon = this.rm.generate();
-            this.group.add( this.ribbon );
-                // reload model if required
-            if ( this.modelloaded.localeCompare( fpenv.getModel() ) )   {
-                this.group.remove(this.model);
-                
-                var that = this;
-                this.mloader.load( fpenv.getModelMaterials(), 
-                    function( materials ) {
-                        materials.preload();
-                        that.oloader.setMaterials( materials );
-                        that.loadModel(that.oloader);
-                    },
-                    function (xhr) {},  // called when loading is in progresses
-                    function (error) {  // called when loading has errors
-                        // on error, just load the model with no materials
-                        that.loadModel(that.oloader);
-                    }
-                );         
-        
-            } else if (this.model !== null)   {
-                // set model scale for existing one
-                this.setModel(this.model, fpenv.getModelScale() );                //fpenv.getModelScale()
-            }
-            
-                // update charts
-            this.updateCharts();
-            
-                // position group            
-            this.moveGroup(this.group);
-            
-                // reset model position to 0
-            fpenv.setModelPos(0);
-            this.advanceModel();
-            
-                // create box
-            this.box = this.styleR.getStyle(fpenv.getSchedule()[0]);            
-            this.scene.add( this.box );
-                // add RMC to scene
-            this.scene.add( this.group );
-            
-                // add Origin indicator
-            var geometry = new ConeGeometry(1.25, 2.5, 15 );
-            var material = new MeshMatcapMaterial({color: 0xff0000});
-            var pole = new Mesh(geometry, material);
-            pole.position.y = 1.25;
-            this.origin.add(pole);
-                // add label
-            var spOrigin = new Spritee( "Origin");
-            spOrigin.position.y = 1;
-            this.origin.add( spOrigin );
-            this.moveGroup(this.origin);
-                // add to scene
-            this.scene.add( this.origin );
-            
-                // draw everything
-            this.controls.update();
-            this.renderer.render(this.scene, this.camera);            
+
+            this.redrawRMC_path(this.pathArray);
+            this.redrawRMC_path(this.pathArray2);
         }
-                
     }
     
     updateCharts() {
@@ -406,6 +420,9 @@ class Plotter {
     
     setPathArray(arr)  {
         this.pathArray = [...arr];
+    }
+    setPathArray2(arr)  {
+        this.pathArray2 = [...arr];
     }
     
     getPA() {

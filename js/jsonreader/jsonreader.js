@@ -181,7 +181,8 @@ class JSONReader {
         guiScM.scoreTotal();
         // load data
         plot.setPathArray(json.data);
-        // estimate flight time, add some % for 10 meter 
+        plot.setPathArray2(json.data2);
+        // estimate flight time, add some % for 10 meter
         if (json.data.length === 0)  {
             console.log("corrupt log file");
             alert("Corrupt log file");

@@ -45,9 +45,11 @@ class BinReader {
         this.fmtcodes= []; // associative array to store block codes
         this.str= '';
         this.data = [];
+        this.data2 = [];
         this.that = this;
         this.modal = document.getElementById('siteModal');
         this.count = 0;
+        this.count2 = 0;
         this.json = null;
         fpenv.setMinAlt(minAlt);
         // initialise with the largest set of mans (make generic the largest)
@@ -135,7 +137,8 @@ class BinReader {
                 }
             },
             mans : this.mans,
-            data : this.data
+            data : this.data,
+            data2 : this.data2
         };
         this.event = new Event('newJSON');
         
@@ -236,7 +239,9 @@ class BinReader {
         this.fmtcodes= []; // associative array to store block codes
         this.str= '';
         this.data = [];
+        this.data2 = [];
         this.count = 0;
+        this.count2 = 0;
         this.json = null;
         // define the handler for processing complete BIN file
         this.reader = new FileReader();
@@ -469,7 +474,8 @@ class BinReader {
         this.output.parameters.schedule= fpenv.getSchedule();
         this.output.mans = this.mans;
         this.output.data = this.data;
-        
+        this.output.data2 = this.data2;
+
     }
 
     processFMTs()  {
@@ -498,6 +504,16 @@ class BinReader {
         
     }
 
+    get_lat_lon_NED(loc1, loc2) {
+        var longitude_scale = Math.cos(this.toRadians(loc1.lat));
+        var LATLON_TO_M = 0.011131884502145034 * 1.0e7;
+        var ret = {}
+        ret.N = (loc2.lat - loc1.lat) * LATLON_TO_M;
+        ret.E = (loc2.lng - loc1.lng) * LATLON_TO_M * longitude_scale;
+        ret.D = loc1.alt - loc2.alt;
+        return ret;
+    }
+
     processMessages()  {
         // processing the main data section
         // currently it reads:
@@ -512,6 +528,7 @@ class BinReader {
         var point = {};
         var un = {};
         this.data = [];
+        this.data2 = [];
 
         // start looking for pose blocks, start from 0
         var msgtype = "POST";
@@ -525,10 +542,10 @@ class BinReader {
         let orgnunpack = 'C2header/Ctype/QTime/CType/lLat/lLng/lAlt'; // unpacking format (converting from binary to variables
         let posorgn = this.strpos(this.binstring, orgnbytes, pos + 1);
         let org = unpack(orgnunpack, this.binstring.slice(posorgn, posorgn + 500));
-        this.orgGPS =   {
-            lat: org['Lat']/10000000,
-            lng: org['Lng']/10000000,
-            alt: org['Alt']/100
+        this.orgGPS = {
+            lat: org['Lat']*1.0e-7,
+            lng: org['Lng']*1.0e-7,
+            alt: org['Alt']*0.01
         };
 
         // use to force Origin to different location
@@ -539,6 +556,52 @@ class BinReader {
         console.log("found Origin " + this.orgGPS.lat + " " + this.orgGPS.lng + " " + this.orgGPS.alt);
         guiSM.originGPS = this.orgGPS;
 
+        // handle loading dual logs
+        if (fpenv.getShowDual()) {
+
+            var msgtype = "VEH";
+            var veh_marker = "a395" + this.dechex(this.fmtcodes[msgtype]['code']);
+            var veh_bytes = this.hex2bin(veh_marker);
+
+            pos = 1
+            var veh_unpack = 'C2header/Ctype/QTime/CSysID/LTSec/LTUsec/LLat/LLon/fAlt/fR/fP/fY';
+
+            while (pos !== false)  {
+
+                point = {};
+
+                pos = this.strpos(this.binstring, veh_bytes, pos + 1);
+
+                if (pos) {
+                    un = unpack(veh_unpack, this.binstring.slice(pos, pos + 500) );
+                    var loc = {};
+                    loc.lat = un['Lat'] * 1.0e-7;
+                    loc.lng = un['Lon'] * 1.0e-7;
+                    loc.alt = un['Alt'];
+
+                    var NED = this.get_lat_lon_NED(this.orgGPS, loc);
+                    // alert("PARSE NED: " + NED.N + " " + NED.E + " " + NED.D)
+
+                    point.time  = un['Time'];
+                    point.N     = NED.N;
+                    point.E     = NED.E;
+                    point.D     = NED.D;
+                    point.r     = un['R'];
+                    point.p     = un['P'];
+                    point.yw    = un['Y'];
+                    if (un['SysID'] == 2) {
+                        this.data2[this.count2] = point;
+                        this.count2++;
+                    } else {
+                        this.data[this.count] = point;
+                        this.count++;
+                    }
+                }
+            }
+            console.log("found " + this.count + " valid VEH points");
+            return;
+        }
+        
         while (pos !== false)  {
 
             point = {};
