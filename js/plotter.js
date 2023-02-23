@@ -195,7 +195,9 @@ class Plotter {
         this.oloader = new OBJLoader();       // obj model loader
         this.mloader = new MTLLoader();       // material loader
         this.model = null;       // model object
+        this.model2 = null;       // model2 object
         this.modelloaded = fpenv.getModel();   // loaded model location
+        this.model2loaded = fpenv.getModel();   // loaded model location
         this.ribbon = null;      // ribbon mesh
         this.styleR = window.Style; //new Style(); // call only once
         this.box = this.styleR.getStyle( fpenv.getSchedule()[0] );
@@ -251,13 +253,17 @@ class Plotter {
         }
         
         this.moveCharts(cpos);
+
+        if (this.model2 !== null) {
+            var pa2 = this.pathArray2
+            // alert("POS: " + this.pa[cpos].E + " " + pa2[cpos].E);
+            this.model2.rotation.set( -pa2[cpos].roll , -pa2[cpos].yaw - Math.PI, -pa2[cpos].pitch , "YZX");
+            this.model2.position.set( pa2[cpos].N, -pa2[cpos].D, pa2[cpos].E);
+        }
         
     }
 
     redrawRMC_path(path)    {
-
-        this.pa = path.slice(fpenv.getStart(), fpenv.getStop());  // show only subset
-        if (this.pa.length < 2) return;
 
         this.ribbon = this.rm.generate();
         this.group.add( this.ribbon );
@@ -265,7 +271,7 @@ class Plotter {
         // reload model if required
         if ( this.modelloaded.localeCompare( fpenv.getModel() ) )   {
             this.group.remove(this.model);
-            
+
             var that = this;
             this.mloader.load( fpenv.getModelMaterials(), 
                                function( materials ) {
@@ -283,6 +289,29 @@ class Plotter {
         } else if (this.model !== null)   {
             // set model scale for existing one
             this.setModel(this.model, fpenv.getModelScale() );                //fpenv.getModelScale()
+        }
+
+        // reload model if required
+        if ( this.model2loaded.localeCompare( fpenv.getModel() ) )   {
+            this.group.remove(this.model2);
+
+            var that = this;
+            this.mloader.load( fpenv.getModelMaterials(), 
+                               function( materials ) {
+                                   materials.preload();
+                                   that.oloader.setMaterials( materials );
+                                   that.loadModel2(that.oloader);
+                               },
+                               function (xhr) {},  // called when loading is in progresses
+                               function (error) {  // called when loading has errors
+                                   // on error, just load the model with no materials
+                                   that.loadModel2(that.oloader);
+                               }
+                             );         
+            
+        } else if (this.model2 !== null)   {
+            // set model scale for existing one
+            this.setModel2(this.model2, fpenv.getModelScale() );                //fpenv.getModelScale()
         }
         
         // update charts
@@ -334,8 +363,13 @@ class Plotter {
             this.group = new Group(); // groups ribbon and model together            
             this.origin = new Group(); //                                    
 
-            this.redrawRMC_path(this.pathArray);
-            this.redrawRMC_path(this.pathArray2);
+            this.pa = this.pathArray;
+            this.redrawRMC_path();
+            this.pa = this.pathArray2;
+            this.redrawRMC_path();
+
+            this.pa = this.pathArray;
+            this.pa2 = this.pathArray2;
         }
     }
     
@@ -518,6 +552,16 @@ class Plotter {
         this.model.position.set( this.pa[0].N, -this.pa[0].D, this.pa[0].E);
         this.render();
     }
+
+    setModel2(m, scale)  {
+        this.model2 = m;
+        this.model2loaded = fpenv.getModel();
+        this.group.add(this.model2);
+        this.model2.scale.set(fpenv.getModelWingspan()/scale, fpenv.getModelWingspan()/scale, fpenv.getModelWingspan()/scale);
+        this.model2.rotation.set( -this.pa[0].roll , -this.pa[0].yaw - Math.PI, -this.pa[0].pitch , "YZX");
+        this.model2.position.set( this.pa[0].N, -this.pa[0].D, this.pa[0].E);
+        this.render();
+    }
     
     loadModel(loader, initial = false) {
         
@@ -540,7 +584,29 @@ class Plotter {
         );
 
     }
+
+    loadModel2(loader, initial = false) {
         
+        loader.load(
+            // resource URL
+            fpenv.getModel(),
+            // called when resource is loaded
+            function ( object ) {
+                if (initial)
+                    plot.setModel2( object, fpenv.getModelScale()/4);    // first time set to larger model x 4 fpenv.getModelScale()
+                else 
+                    plot.setModel2( object, fpenv.getModelScale());    // regular
+            },
+            // called when loading is in progresses
+            function ( xhr ) {
+            },
+            // called when loading has errors
+            function ( error ) {
+            }
+        );
+
+    }
+    
     setCamera(arr) {
         this.camera.position.set(arr[0],arr[1],arr[2]);
     }
@@ -653,6 +719,19 @@ class Plotter {
                 }
         );
 
+        this.mloader.load( fpenv.getModelMaterials(), 
+            function( materials ) {
+                materials.preload();
+                that.oloader.setMaterials( materials );
+                that.loadModel2(that.oloader, true);
+                },
+            function (xhr) {},  // called when loading is in progresses
+            function (error) {  // called when loading has errors
+                // on error, just load the model with no materials
+                that.loadModel2(that.oloader, true);
+                }
+        );
+        
         // Renderer
         this.renderer.setPixelRatio( window.devicePixelRatio );
         this.renderer.setClearColor( 0x000000, 0.0 );
