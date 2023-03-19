@@ -252,6 +252,7 @@ class Plotter {
         if (this.model === null)  return; // could not load model
         if (fpenv.getFlying()) fpenv.incModelPos();
         let cpos = fpenv.getModelPos();
+        this.addRPY(this.pa, cpos);
         this.model.rotation.set( -this.pa[cpos].roll , -this.pa[cpos].yaw - Math.PI, -this.pa[cpos].pitch , "YZX");
         this.model.position.set( this.pa[cpos].N, -this.pa[cpos].D, this.pa[cpos].E);
         
@@ -271,6 +272,7 @@ class Plotter {
         if (this.model2 !== null) {
             var pa2 = this.pa2
             var cpos2 = this.find_closest_cpos(this.pa[cpos].utc_time, this.pa2)
+            this.addRPY(this.pa2, cpos2);
             this.model2.rotation.set( -pa2[cpos2].roll , -pa2[cpos2].yaw - Math.PI, -pa2[cpos2].pitch , "YZX");
             this.model2.position.set( pa2[cpos2].N, -pa2[cpos2].D, pa2[cpos2].E);
         }
@@ -556,12 +558,19 @@ class Plotter {
         }
 
     }
+
+    addRPY(pa, pos) {
+        pa[pos].roll = pa[pos].r / 180 * Math.PI;
+        pa[pos].pitch = pa[pos].p / 180 * Math.PI;
+        pa[pos].yaw = pa[pos].yw / 180 * Math.PI;
+    }
     
     setModel(m, scale)  {
         this.model = m;
         this.modelloaded = fpenv.getModel();
         this.group.add(this.model);
-        this.model.scale.set(fpenv.getModelWingspan()/scale, fpenv.getModelWingspan()/scale, fpenv.getModelWingspan()/scale);                
+        this.model.scale.set(fpenv.getModelWingspan()/scale, fpenv.getModelWingspan()/scale, fpenv.getModelWingspan()/scale);
+        this.addRPY(this.pa, 0);
         this.model.rotation.set( -this.pa[0].roll , -this.pa[0].yaw - Math.PI, -this.pa[0].pitch , "YZX");
         this.model.position.set( this.pa[0].N, -this.pa[0].D, this.pa[0].E);
         this.render();
@@ -785,7 +794,7 @@ class Plotter {
 function  mainLoop() {
         
     if (fpenv.getFlying()) {
-        if (flightSpeed >= fpenv.getDropFrames()-1 )   {
+        if (flightSpeed >= fpenv.getDropFrames()-1)   {
             plot.advanceModel();
             plot.render();
             flightSpeed = 0;
