@@ -61,7 +61,7 @@ var fpenv = (function() {
     var zooms2 = false;
     let performance = true;
     let showactual = true;
-    let showdual = false;
+    let showdual = true;
     var template = ['F3A', '23', 'P23_template_150.json'];   // default value
     var schedule = ['Generic', 'Generic'];    
     var schedules = [
@@ -309,7 +309,7 @@ var fpenv = (function() {
             zooms2 = false;
             performance = true;
             showactual = true;
-            showdual = false;
+            showdual = true;
             originGPS = {
                 lat: 0.00,
                 lng: 0.00,
