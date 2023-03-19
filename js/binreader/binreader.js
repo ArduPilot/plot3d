@@ -425,15 +425,6 @@ class BinReader {
         
         // filter data for minimum altitude
         // do that across all flight
-        for (var i=0; i < this.data.length; i++) {
-                        
-            if (this.data[i].D > this.minalt)    {
-                this.data.splice(i, 1);
-                i=i-1;
-            }
-            
-        }
-        
         // split the points against mans
         this.count = this.data.length;
         let ln = this.mans.length;
