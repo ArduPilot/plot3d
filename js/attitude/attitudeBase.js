@@ -138,6 +138,21 @@ export class AttitudeBase {
             }
         );
 
+        try {
+            this.mloader.load( fpenv.getModelMaterials(),
+                               function( materials ) {
+                                   materials.preload();
+                                   that.oloader.setMaterials( materials );
+                                   that.loadModel2(roll, yaw, pitch, dir);
+                               },
+                               function (xhr) {},  // called when loading is in progresses
+                               function (error) {  // called when loading has errors
+                                   // on error, just load the model with no materials
+                                   that.loadModel2(roll, yaw, pitch, dir);
+                               }
+                             );
+        } catch (e) {}
+        
     }
     
     resize()    {

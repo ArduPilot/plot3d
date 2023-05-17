@@ -245,6 +245,10 @@ class Plotter {
                 high = mid;
             }
         }
+        //alert("utc_times: " + utc_time + " " + pa[low].utc_time + " low=" + low + " len=" + pa.length);
+        if (pa[low].utc_time === undefined) {
+            return 0;
+        }
         return low;
     }
         
@@ -269,9 +273,10 @@ class Plotter {
         
         this.moveCharts(cpos);
 
-        if (this.model2 !== null) {
-            var pa2 = this.pa2
-            var cpos2 = this.find_closest_cpos(this.pa[cpos].utc_time, this.pa2)
+        if (this.model2 !== null && this.pathArray2.length > 10) {
+            var pa2 = this.pa2;
+            var cpos2 = this.find_closest_cpos(this.pa[cpos].utc_time, this.pa2);
+            //alert("model2 found" + ":" + cpos + ":" + cpos2 + " NED=" + pa2[cpos2].N + ":" + pa2[cpos2].E + ":" + pa2[cpos2].D);
             this.addRPY(this.pa2, cpos2);
             this.model2.rotation.set( -pa2[cpos2].roll , -pa2[cpos2].yaw - Math.PI, -pa2[cpos2].pitch , "YZX");
             this.model2.position.set( pa2[cpos2].N, -pa2[cpos2].D, pa2[cpos2].E);
@@ -338,8 +343,10 @@ class Plotter {
         
         // reset model position to 0
         fpenv.setModelPos(0);
-        this.advanceModel();
-        
+        for (let i = 0; i <= 10; i++) {
+            this.advanceModel();
+        }
+
         // create box
         this.box = this.styleR.getStyle(fpenv.getSchedule()[0]);            
         this.scene.add( this.box );
@@ -380,9 +387,12 @@ class Plotter {
             this.origin = new Group(); //                                    
 
             this.pa = this.pathArray;
+            this.pa2 = this.pathArray2;
             this.redrawRMC_path();
-            this.pa = this.pathArray2;
-            this.redrawRMC_path();
+            if (this.pathArray2.length > 10) {
+                this.pa = this.pathArray2;
+                this.redrawRMC_path();
+            }
 
             this.pa = this.pathArray;
             this.pa2 = this.pathArray2;
@@ -580,10 +590,13 @@ class Plotter {
         this.model2 = m;
         this.model2loaded = fpenv.getModel();
         this.group.add(this.model2);
-        this.model2.scale.set(fpenv.getModelWingspan()/scale, fpenv.getModelWingspan()/scale, fpenv.getModelWingspan()/scale);
-        this.model2.rotation.set( -this.pa[0].roll , -this.pa[0].yaw - Math.PI, -this.pa[0].pitch , "YZX");
-        this.model2.position.set( this.pa[0].N, -this.pa[0].D, this.pa[0].E);
-        this.render();
+        try {
+            this.addRPY(this.pa2, 0);
+            this.model2.scale.set(fpenv.getModelWingspan()/scale, fpenv.getModelWingspan()/scale, fpenv.getModelWingspan()/scale);
+            this.model2.rotation.set( -this.pa2[0].roll , -this.pa2[0].yaw - Math.PI, -this.pa2[0].pitch , "YZX");
+            this.model2.position.set( this.pa2[0].N, -this.pa2[0].D, this.pa2[0].E);
+            this.render();
+        } catch(e) {}
     }
     
     loadModel(loader, initial = false) {
@@ -593,10 +606,11 @@ class Plotter {
             fpenv.getModel(),
             // called when resource is loaded
             function ( object ) {
-                if (initial)
+                if (initial) {
                     plot.setModel( object, fpenv.getModelScale()/4);    // first time set to larger model x 4 fpenv.getModelScale()
-                else 
+                } else {
                     plot.setModel( object, fpenv.getModelScale());    // regular
+                }
             },
             // called when loading is in progresses
             function ( xhr ) {
