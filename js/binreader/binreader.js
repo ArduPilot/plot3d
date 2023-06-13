@@ -555,7 +555,7 @@ class BinReader {
             var veh_bytes = this.hex2bin(veh_marker);
 
             pos = 1
-            var veh_unpack = 'C2header/Ctype/QTime/CSysID/LTSec/LTUsec/LLat/LLon/fAlt/fR/fP/fY';
+            var veh_unpack = 'C2header/Ctype/QTime/CSysID/SGWk/IGMS/LLat/LLon/fAlt/fR/fP/fY';
 
             while (pos !== false)  {
 
@@ -574,7 +574,7 @@ class BinReader {
                     // alert("PARSE NED: " + NED.N + " " + NED.E + " " + NED.D)
 
                     point.time  = un['Time'];
-                    point.utc_time = un['TSec'] + un['TUsec']*1.0e-6;
+                    point.gps_time = un['GWk']*7*24*60*60.0 + un['GMS']*1.0e-3;
                     point.N     = NED.N;
                     point.E     = NED.E;
                     point.D     = NED.D;
@@ -583,9 +583,15 @@ class BinReader {
                     point.yw    = un['Y'];
                     if (un['SysID'] == 2) {
                         this.data2[this.count2] = point;
+                        if (this.count2 > 1 && point.gps_time <= this.data2[this.count2-1].gps_time) {
+                            alert("time backwards1")
+                        }
                         this.count2++;
                     } else {
                         this.data[this.count] = point;
+                        if (this.count > 1 && point.gps_time <= this.data[this.count-1].gps_time) {
+                            alert("time backwards2")
+                        }
                         this.count++;
                     }
                 }

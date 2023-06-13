@@ -234,19 +234,19 @@ class Plotter {
         
     }
 
-    find_closest_cpos(utc_time, pa) {
+    find_closest_cpos(gps_time, pa) {
         var low = 0;
         var high = pa.length-1;
         while (low < high) {
             var mid = Math.floor((low+high)/2);
-            if (utc_time > pa[mid].utc_time) {
+            if (gps_time > pa[mid].gps_time) {
                 low = mid + 1;
             } else {
                 high = mid;
             }
         }
-        //alert("utc_times: " + utc_time + " " + pa[low].utc_time + " low=" + low + " len=" + pa.length);
-        if (pa[low].utc_time === undefined) {
+        console.log("gps_times: " + gps_time + " " + pa[low].gps_time + " low=" + low + " len=" + pa.length);
+        if (pa[low].gps_time === undefined) {
             return 0;
         }
         return low;
@@ -256,30 +256,32 @@ class Plotter {
         if (this.model === null)  return; // could not load model
         if (fpenv.getFlying()) fpenv.incModelPos();
         let cpos = fpenv.getModelPos();
+        var p1 = this.pa[cpos];
         this.addRPY(this.pa, cpos);
-        this.model.rotation.set( -this.pa[cpos].roll , -this.pa[cpos].yaw - Math.PI, -this.pa[cpos].pitch , "YZX");
-        this.model.position.set( this.pa[cpos].N, -this.pa[cpos].D, this.pa[cpos].E);
+        this.model.rotation.set( -p1.roll , -p1.yaw - Math.PI, -p1.pitch , "YZX");
+        this.model.position.set( p1.N, -p1.D, p1.E);
         
         if (fpenv.getZooms() )  {   // if views are open, rotate model in the views            
-            attitudeTop.flyModel(-this.pa[cpos].roll , -this.pa[cpos].yaw, -this.pa[cpos].pitch, "YZX");
-            attitudeFront.flyModel(-this.pa[cpos].roll , -this.pa[cpos].yaw, -this.pa[cpos].pitch, "YZX");
-            attitudeSide.flyModel(-this.pa[cpos].roll , -this.pa[cpos].yaw, -this.pa[cpos].pitch, "YZX");
+            attitudeTop.flyModel(-p1.roll , -p1.yaw, -p1.pitch, "YZX");
+            attitudeFront.flyModel(-p1.roll , -p1.yaw, -p1.pitch, "YZX");
+            attitudeSide.flyModel(-p1.roll , -p1.yaw, -p1.pitch, "YZX");
         }
         
         if (fpenv.getZooms2() )  {   // if views are open, rotate model in the views            
-            //attitudeFM.flyModel(-this.pa[cpos].roll , -this.pa[cpos].yaw, -this.pa[cpos].pitch, "YZX");
-            //attitudePilot.flyModel(-this.pa[cpos].roll , -this.pa[cpos].yaw, -this.pa[cpos].pitch, "YZX");
+            //attitudeFM.flyModel(-p1.roll , -p1.yaw, -p1.pitch, "YZX");
+            //attitudePilot.flyModel(-p1.roll , -p1.yaw, -p1.pitch, "YZX");
         }
         
         this.moveCharts(cpos);
 
         if (this.model2 !== null && this.pathArray2.length > 10) {
             var pa2 = this.pa2;
-            var cpos2 = this.find_closest_cpos(this.pa[cpos].utc_time, this.pa2);
+            var cpos2 = this.find_closest_cpos(p1.gps_time, this.pa2);
             //alert("model2 found" + ":" + cpos + ":" + cpos2 + " NED=" + pa2[cpos2].N + ":" + pa2[cpos2].E + ":" + pa2[cpos2].D);
+            var p2 = this.pa2[cpos2];
             this.addRPY(this.pa2, cpos2);
-            this.model2.rotation.set( -pa2[cpos2].roll , -pa2[cpos2].yaw - Math.PI, -pa2[cpos2].pitch , "YZX");
-            this.model2.position.set( pa2[cpos2].N, -pa2[cpos2].D, pa2[cpos2].E);
+            this.model2.rotation.set( -p2.roll , -p2.yaw - Math.PI, -p2.pitch , "YZX");
+            this.model2.position.set( p2.N, -p2.D, p2.E);
         }
         
     }
